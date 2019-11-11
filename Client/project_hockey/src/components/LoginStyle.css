@@ -1,50 +1,49 @@
-/*.buttonlogin {
-    margin: 10px 40px 0px 0px;
-    width: 100px;
-    height: 50px;
-    background-color: black;
-    color: white;
-    float: right;
-    
-}
-*/
 
 /* Style the input container */
-.topnav .login-container {
+.headerbody .login-container {
     float: right;
   }
   
-  /* Style the input field inside the navbar */
-  .topnav input[type=text] {
+  /* Style the input field inside the bar */
+  .headerbody input[type=text] {
     padding: 6px;
-    margin-top: 8px;
+    margin-top: 20px;
     font-size: 17px;
     border: none;
-    width: 150px; /* adjust as needed (as long as it doesn't break the topnav) */
+    width: 150px; /* adjust as needed (as long as it doesn't break the headerbody) */
   }
   
   /* Style the button inside the input container */
-  .topnav .login-container button {
+  .headerbody .login-container button {
     float: right;
     padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
+    margin: 20px 50px 0px 0px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .register-button {
+    float: right;
+    padding: 6px;
+    margin: 20px 0px 0px 0px;
     background: #ddd;
     font-size: 17px;
     border: none;
     cursor: pointer;
   }
   
-  .topnav .login-container button:hover {
+  .headerbody .login-container button:hover {
     background: #ccc;
   }
   
-  /* Add responsiveness - On small screens, display the navbar vertically instead of horizontally */
+  /* On small screens, display the login vertically instead of horizontally */
   @media screen and (max-width: 600px) {
-    .topnav .login-container {
+    .headerbody .login-container {
       float: none;
     }
-    .topnav a, .topnav input[type=text], .topnav .login-container button {
+    .headerbody a, .headerbody input[type=text], .headerbody .login-container button {
       float: none;
       display: block;
       text-align: left;
@@ -52,7 +51,7 @@
       margin: 0;
       padding: 14px;
     }
-    .topnav input[type=text] {
+    .headerbody input[type=text] {
       border: 1px solid #ccc;
     }
   }
