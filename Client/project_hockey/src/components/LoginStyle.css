@@ -5,7 +5,15 @@
   }
   
   /* Style the input field inside the bar */
-  .headerbody input[type=text] {
+  .headerbody input[type=text]{
+    padding: 6px;
+    margin-top: 20px;
+    font-size: 17px;
+    border: none;
+    width: 150px; /* adjust as needed (as long as it doesn't break the headerbody) */
+  }
+
+  .headerbody input[type=password]{
     padding: 6px;
     margin-top: 20px;
     font-size: 17px;
