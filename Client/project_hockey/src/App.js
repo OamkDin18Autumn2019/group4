@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/NotLoggedinHeader';
 import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
+import MainWindow from './components/MainWindow';
 
 
 export default class App extends Component {
@@ -34,6 +35,8 @@ export default class App extends Component {
 
   render(){
     return (
+      <div>
+        
       <Router>
         <Route path="/" exact render={
           (routeProps) =>
@@ -55,6 +58,8 @@ export default class App extends Component {
           }>          
         </ProtectedRoute>
       </Router>
+          <MainWindow />
+      </div>
     );
   }
 }
