@@ -4,7 +4,7 @@ import './HeaderStyle.css';
 import './LoginStyle.css';
 
 
-export default function LoginPage(props) {
+export default function Header(props) {
 
     function login(event)
     {    
