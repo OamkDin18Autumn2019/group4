@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import './App.css';
-import LoginPage from './components/LoginPage';
+import Header from './components/NotLoggedinHeader';
 import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -37,7 +37,7 @@ export default class App extends Component {
       <Router>
         <Route path="/" exact render={
           (routeProps) =>
-            <LoginPage
+            <Header
               loginSuccess = { this.onLogin }
               loginFail = { this.onLoginFail }
               setUserInfo = { this.setUserInfo }
