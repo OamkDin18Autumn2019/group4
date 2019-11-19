@@ -70,7 +70,7 @@ app.post('/users', (req, res) => {
      (password.length > 6))
   {
     bcrypt.hash(password, saltRounds).then(hash =>
-      db.query('INSERT INTO users (username, password) VALUES (?,?)', [username, hash])
+      db.query('INSERT INTO NHLusers (username, password) VALUES (?,?)', [username, hash])
     )
     .then(dbResults => {
         console.log(dbResults);
@@ -85,7 +85,7 @@ app.post('/users', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-  db.query('SELECT id, username FROM users').then(results => {
+  db.query('SELECT id, username FROM NHLusers').then(results => {
     res.json(results);
   })
 });
@@ -93,13 +93,13 @@ app.get('/users', (req, res) => {
 app.get('/users/:id',
         passport.authenticate('basic', { session: false }),
         (req, res) => {
-          db.query('SELECT id, username FROM users WHERE id = ?', [req.params.id]).then(results => {
+          db.query('SELECT id, username FROM NHLusers WHERE id = ?', [req.params.id]).then(results => {
             res.json(results);
           })
         });
 
 passport.use(new Strategy((username, password, cb) => {
-  db.query('SELECT id, username, password FROM users WHERE username = ?', [username]).then(dbResults => {
+  db.query('SELECT id, username, password FROM NHLusers WHERE username = ?', [username]).then(dbResults => {
 
     if(dbResults.length == 0)
     {
@@ -123,11 +123,7 @@ passport.use(new Strategy((username, password, cb) => {
 /* DB init if the tables dont exist */
 Promise.all(
   [
-      db.query(`CREATE TABLE IF NOT EXISTS users(
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          username VARCHAR(32),
-          password VARCHAR(256)
-      )`)
+    
       // Add more table statements if you need more tables
   ]
 ).then(() => {

@@ -5,6 +5,7 @@ import Header from './components/NotLoggedinHeader';
 import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import MainWindow from './components/MainWindow';
+import Calendar from './components/CalendarBlock';
 
 
 export default class App extends Component {
@@ -40,6 +41,7 @@ export default class App extends Component {
       <Router>
         <Route path="/" exact render={
           (routeProps) =>
+          
             <Header
               loginSuccess = { this.onLogin }
               loginFail = { this.onLoginFail }
@@ -47,18 +49,26 @@ export default class App extends Component {
               redirectPathOnSuccess="/HomePage"
               {...routeProps}
             />
+            
           } 
         />
 
-        <ProtectedRoute isAuthenticated={this.state.isAuthenticated} path="/HomePage" exact render={
+        <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/HomePage" exact render={
             (routeProps) =>
+            <div>
               <HomePage
                 UserInfo={ this.state.UserInfo }
               />
-          }>          
+              <MainWindow
+                UserInfo={ this.state.UserInfo }
+              /> </div>
+          }>   
+             
         </ProtectedRoute>
       </Router>
-          <MainWindow />
+        
+      
+          
       </div>
     );
   }
