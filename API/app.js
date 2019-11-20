@@ -60,17 +60,23 @@ const saltRounds = 4;
 app.use(bodyParser.json());
 app.use(cors());
 
+ //----------------------------------------------------------------------USERS---------------------------------------------------------------------------------//
+
 app.post('/users', (req, res) => {
   let username = req.body.username.trim();
   let password = req.body.password.trim();
+  let email = req.body.email.trim();
+  let role = req.body.role.trim();
+  let handness = req.body.handness.trim();
 
   if((typeof username === "string") &&
      (username.length > 4) &&
      (typeof password === "string") &&
-     (password.length > 6))
+     (password.length > 6) && 
+     (typeof email === "string"))
   {
     bcrypt.hash(password, saltRounds).then(hash =>
-      db.query('INSERT INTO NHLusers (username, password) VALUES (?,?)', [username, hash])
+      db.query('INSERT INTO NHLusers (username, password, email, role, handness) VALUES (?,?,?,?,?)', [username, hash, email, role, handness])
     )
     .then(dbResults => {
         console.log(dbResults);
@@ -96,7 +102,77 @@ app.get('/users/:id',
           db.query('SELECT id, username, teamid, goals, assists, email, role, handness FROM NHLusers WHERE id = ?', [req.params.id]).then(results => {
             res.json(results);
           })
-        });
+ });
+
+ //----------------------------------------------------------------------TEAMS---------------------------------------------------------------------------------//
+
+ app.post('/teams', (req, res) => {
+  let teamname = req.body.teamname.trim();
+  let teaminfo = req.body.teaminfo.trim();
+  let teamowner = req.body.id.trim();
+
+  if((typeof teamname === "string"))
+  {
+    (db.query('INSERT INTO NHLteams (teamname, teaminfo, teamowner) VALUES (?,?,?)', [teamname, teaminfo, teamowner]))
+    .then(dbResults => {
+        console.log(dbResults);
+        res.sendStatus(201);
+    })
+    .catch(error => res.sendStatus(500));
+  }
+  else {
+    console.log("teamname is not string");
+    res.sendStatus(400);
+  }
+});
+
+app.get('/teams', (req, res) => {
+  db.query('SELECT teamid, teamname, teaminfo, teamowner, teamwins, teamlosses FROM NHLteams').then(results => {
+    res.json(results);
+  })
+});
+
+app.get('/teams/:teamid',(req, res) => {
+  db.query('SELECT teamid, teamname, teaminfo, teamowner, teamwins, teamlosses FROM NHLteams WHERE teamid = ?', [req.params.teamid]).then(results => {
+    res.json(results);
+  })
+});
+
+ //----------------------------------------------------------------------LEAGUES---------------------------------------------------------------------------------//
+
+app.post('/leagues', (req, res) => {
+  let leaguename = req.body.leaguename.trim();
+  let leagueinfo = req.body.leagueinfo.trim();
+  let leagueowner = req.body.id.trim();
+
+  if((typeof leaguename === "string"))
+  {
+    (db.query('INSERT INTO NHLleagues (leaguename, leagueinfo, leagueowner) VALUES (?,?,?)', [leaguename, leagueinfo, leagueowner]))
+    .then(dbResults => {
+        console.log(dbResults);
+        res.sendStatus(201);
+    })
+    .catch(error => res.sendStatus(500));
+  }
+  else {
+    console.log("leaguename is not string");
+    res.sendStatus(400);
+  }
+});
+
+app.get('/leagues', (req, res) => {
+  db.query('SELECT leagueid, leaguename, leagueinfo, leagueowner, teams FROM NHLleagues').then(results => {
+    res.json(results);
+  })
+});
+
+app.get('/leagues/:leagueid',(req, res) => {
+  db.query('SELECT leagueid, leaguename, leagueinfo, leagueowner, teams FROM NHLleagues WHERE leagueid = ?', [req.params.leagueid]).then(results => {
+    res.json(results);
+  })
+});
+
+ //----------------------------------------------------------------------PASSPORT---------------------------------------------------------------------------------//
 
 passport.use(new Strategy((username, password, cb) => {
   db.query('SELECT id, username, password FROM NHLusers WHERE username = ?', [username]).then(dbResults => {
@@ -123,8 +199,7 @@ passport.use(new Strategy((username, password, cb) => {
 /* DB init if the tables dont exist */
 Promise.all(
   [
-    
-      // Add more table statements if you need more tables
+      // Add table creation statements if you need new tables
   ]
 ).then(() => {
   console.log('Database Initialized');
