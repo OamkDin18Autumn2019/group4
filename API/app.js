@@ -85,7 +85,7 @@ app.post('/users', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-  db.query('SELECT id, username FROM NHLusers').then(results => {
+  db.query('SELECT id, username, teamid, goals, assists, email, role, handness FROM NHLusers').then(results => {
     res.json(results);
   })
 });
@@ -93,7 +93,7 @@ app.get('/users', (req, res) => {
 app.get('/users/:id',
         passport.authenticate('basic', { session: false }),
         (req, res) => {
-          db.query('SELECT id, username FROM NHLusers WHERE id = ?', [req.params.id]).then(results => {
+          db.query('SELECT id, username, teamid, goals, assists, email, role, handness FROM NHLusers WHERE id = ?', [req.params.id]).then(results => {
             res.json(results);
           })
         });

@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarBlock from './CalendarBlock';
+import Usersearch from './UserSearch';
 
 class MainWindow extends React.Component {
   render()
@@ -9,6 +10,9 @@ class MainWindow extends React.Component {
             <h1>Man window man </h1>
             <div>
               <CalendarBlock UserInfo={this.props.UserInfo} />
+            </div>
+            <div>
+              <Usersearch />
             </div>
           </div>
         )

@@ -5,7 +5,6 @@ import Header from './components/NotLoggedinHeader';
 import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import MainWindow from './components/MainWindow';
-import Calendar from './components/CalendarBlock';
 
 
 export default class App extends Component {
@@ -30,8 +29,8 @@ export default class App extends Component {
     this.setState({ isAuthenticated: false});
   }
 
-  setUserInfo = (username) => {
-    this.setState({ UserInfo: { username }});
+  setUserInfo = (username, id) => {
+    this.setState({ UserInfo: { username, id }});
   }
 
   render(){
