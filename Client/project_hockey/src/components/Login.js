@@ -7,7 +7,6 @@ import './BurgerMenu.js';
 export default function Login() {
     return (
         <div>
-            <div>Hello World</div>
             <div className="headerbody">
                 <div class="login-container">
                     <form action="/action_page.php">

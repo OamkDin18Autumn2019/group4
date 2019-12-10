@@ -9,15 +9,18 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 function App() {
   return (
     <Router>
+      <BurgerMenu />
       <Route path="/" exact render={
         (routeProps) =>
+
           <Login
             redirectPathOnSuccess="/HomePage"
             {...routeProps}
           />
 
+
       } />
-      <BurgerMenu />
+
     </Router>
   );
 }

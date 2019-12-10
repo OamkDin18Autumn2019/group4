@@ -3,11 +3,12 @@ body
 {
   margin: 0;
   padding: 0;
+  overflow: hidden; /* Needed because hiding the scroll when menu is active  */
   
   /* Background style */
   background: #ffffff;
   color: #cdcdcd;
-  font-family: "Avenir Next", "Avenir", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   
   /* Needed because hiding the menu on the right side is not perfect  */
   overflow-x: hidden; 
@@ -30,7 +31,7 @@ a:hover
 {
   display: block;
   position: absolute;
-  top: 50px;
+  top: 25px;
   right: 50px;
   
   z-index: 1;
@@ -102,23 +103,25 @@ a:hover
   transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-/* The last one should go the other direction */
+/* The last one goes other direction */
 #menuToggle input:checked ~ span:nth-last-child(2)
 {
   opacity: 1;
   transform: rotate(-45deg) translate(0, -1px);
 }
 
-/* Make this absolute positioned at the top left of the screen */
+/* Hamburger menu background */
 #menu
 {
   position: absolute;
   width: 300px;
-  height: 500px;
+  height: 100%;
+  min-height: 100vh;
   margin: -100px 0 0 0;
   padding: 50px;
   padding-top: 125px;
   right: -100px;
+  
   
   background: #ededed;
   list-style-type: none;
