@@ -5,23 +5,24 @@ import './BurgerMenu.css';
 export default function BurgerMenu() {
     return (
         <div>
-            <div>Hello World</div>
-            <div className="headerbody">
-                <div class="menu-wrap">
-                    <input type="checkbox" className="toggler"></input>
-                    <div className="hamburger"><div></div></div>
-                    <div className="menu">
-                        <div>
-                            <ul>
-                                <li><a href="#">Option 1</a></li>
-                                <li><a href="#">Option 2</a></li>
-                                <li><a href="#">Option 3</a></li>
-                                <li><a href="#">Option 4</a></li>
-                            </ul>
-                        </div>
-                    </div>
+
+            <nav role='navigation'>
+                <div id="menuToggle">
+
+                    <input type="checkbox" />
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                    <ul id="menu">
+                        <a href="#"><li>Option 1</li></a>
+                        <a href="#"><li>Option 2</li></a>
+                        <a href="#"><li>Option 3</li></a>
+                        <a href="#"><li>Option 4</li></a>
+                    </ul>
                 </div>
-            </div>
+            </nav>
         </div>
     )
 }
