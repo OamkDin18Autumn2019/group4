@@ -33,7 +33,8 @@ export default class App extends Component {
 
   setUserInfo = (username) => {
     this.setState({ UserInfo: { username }});
-=======
+  }
+
   setUserInfo = (id, username/*, teamid, goals, assists, email, role, handness*/) => {
     this.setState({ UserInfo: { id, username/*, teamid, goals, assists, email, role, handness*/}});
   }
