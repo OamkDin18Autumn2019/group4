@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import './App.css';
 import Header from './components/NotLoggedinHeader';
 import HomePage from './components/HomePage';
@@ -13,7 +13,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       UserInfo: null,
-      isAuthenticated: false
+      isAuthenticated: false,
+      location: ""
     };
   }  
 
@@ -29,14 +30,29 @@ export default class App extends Component {
     this.setState({ isAuthenticated: false});
   }
 
-  setUserInfo = (username, id) => {
-    this.setState({ UserInfo: { username, id }});
+  setUserInfo = (id, username/*, teamid, goals, assists, email, role, handness*/) => {
+    this.setState({ UserInfo: { id, username/*, teamid, goals, assists, email, role, handness*/}});
+  }
+
+  /*componentDidMount(){
+    if(sessionStorage.getItem('login') === 'true'){
+      this.setState({ isAuthenticated: true });
+      console.log(sessionStorage.getItem('login'));
+      console.log(this.state.isAuthenticated);
+      this.setUserInfo(sessionStorage.getItem("id"), sessionStorage.getItem("username"));
+      this.context.history.push("/HomePage");
+    }
+  }*/
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.setState({ prevPath: this.props.location })
+    }
   }
 
   render(){
     return (
       <div>
-        
       <Router>
         <Route path="/" exact render={
           (routeProps) =>
@@ -45,6 +61,7 @@ export default class App extends Component {
               loginSuccess = { this.onLogin }
               loginFail = { this.onLoginFail }
               setUserInfo = { this.setUserInfo }
+              location = {this.state.location}
               redirectPathOnSuccess="/HomePage"
               {...routeProps}
             />
