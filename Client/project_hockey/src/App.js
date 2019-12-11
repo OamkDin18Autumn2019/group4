@@ -29,14 +29,13 @@ export default class App extends Component {
     this.setState({ isAuthenticated: false});
   }
 
-  setUserInfo = (username, id) => {
-    this.setState({ UserInfo: { username, id }});
+  setUserInfo = (username) => {
+    this.setState({ UserInfo: { username }});
   }
 
   render(){
     return (
       <div>
-        
       <Router>
         <Route path="/" exact render={
           (routeProps) =>
@@ -48,10 +47,8 @@ export default class App extends Component {
               redirectPathOnSuccess="/HomePage"
               {...routeProps}
             />
-            
           } 
         />
-
         <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/HomePage" exact render={
             (routeProps) =>
             <div>

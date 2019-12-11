@@ -25,7 +25,7 @@ export default function Header(props) {
         <div>
             <div>Hello Hockey World</div>
             <div className="headerbody">
-                <div class="login-container">
+                <div className="login-container">
                     <form onSubmit={login}>
                         <input type="text" placeholder="Username" name="username" />
                         <input type="password" placeholder="Password" name="password" />
