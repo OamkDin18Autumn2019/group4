@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './LoggedinHeader';
+import BurgerMenu from './BurgerMenu';
 
 export default function HomePage(props) {
 
@@ -17,6 +18,7 @@ export default function HomePage(props) {
       <div style={{ color: "red" }}>
         <strong>Testings</strong>
       </div>  
+      <BurgerMenu />
     </div>
   )
 }
