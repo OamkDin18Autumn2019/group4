@@ -23,6 +23,34 @@ export default class Header extends Component {
                 this.setState({ search: res.data});
                 console.log(this.state.search);
             })
+    }
+    
+    logout()
+    {
+        sessionStorage.clear();
+        window.location.reload();
+        console.log("Logged out");
+    }
+
+    render(){
+        const mappedresults = this.state.search.map((result)=><li key={result.id}>{result.username}</li>);
+        const testi = this.state.search
+        return (
+        <div>
+            <div>Hello Hockey World</div>
+            <div className="headerbody">
+
+            <Search content={testi}/> 
+
+                <div className="login-container">
+                    <button type="submit">HAMBURGER</button>
+                    <button type="submit" onClick={this.logout}>Logout</button>
+                </div>
+            </div>
+        </div>
+    )}
+}
+    /*
 
 export default function Header(props) 
 {
@@ -52,4 +80,4 @@ export default function Header(props)
             </div>
         </div>
     )}
-}
+}*/
