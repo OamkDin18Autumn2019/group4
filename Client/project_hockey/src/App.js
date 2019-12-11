@@ -30,6 +30,10 @@ export default class App extends Component {
     this.setState({ isAuthenticated: false});
   }
 
+
+  setUserInfo = (username) => {
+    this.setState({ UserInfo: { username }});
+=======
   setUserInfo = (id, username/*, teamid, goals, assists, email, role, handness*/) => {
     this.setState({ UserInfo: { id, username/*, teamid, goals, assists, email, role, handness*/}});
   }
@@ -48,6 +52,7 @@ export default class App extends Component {
     if (nextProps.location !== this.props.location) {
       this.setState({ prevPath: this.props.location })
     }
+
   }
 
   render(){
@@ -65,10 +70,8 @@ export default class App extends Component {
               redirectPathOnSuccess="/HomePage"
               {...routeProps}
             />
-            
           } 
         />
-
         <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/HomePage" exact render={
             (routeProps) =>
             <div>

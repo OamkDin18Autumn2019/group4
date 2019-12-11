@@ -1,8 +1,9 @@
 import React from 'react';
 import CalendarBlock from './CalendarBlock';
-import Usersearch from './UserSearch';
+import SearchResults from './SearchResults';
 
 class MainWindow extends React.Component {
+
   render()
       { 
         return (
@@ -12,7 +13,9 @@ class MainWindow extends React.Component {
               <CalendarBlock UserInfo={this.props.UserInfo} />
             </div>
             <div>
-              <Usersearch />
+              <div>
+                <SearchResults />
+            </div>
             </div>
           </div>
         )
