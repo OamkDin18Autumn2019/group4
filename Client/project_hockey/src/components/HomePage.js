@@ -2,10 +2,17 @@ import React from 'react';
 import Header from './LoggedinHeader';
 
 export default function HomePage(props) {
+
+  //Parsing the userinfo in session storage
+  let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
+
   return (
     <div style={{textAlign: "center"}}>
             <Header/>
-      <h1>Hello {props.UserInfo.username}!</h1>
+
+      <h1>Hello {ParsedUser.username}!</h1>
+
+      {sessionStorage.getItem("User")} 
 
       <div style={{ color: "red" }}>
         <strong>Testings</strong>

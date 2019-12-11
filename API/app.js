@@ -52,6 +52,7 @@ const passport = require('passport');
 const app = express();
 const db = require('./Connection');
 const port = 4000;
+const jwt = require('jsonwebtoken');
 
 var Strategy = require('passport-http').BasicStrategy;
 
@@ -59,6 +60,12 @@ const saltRounds = 4;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
+  next();
+});
 
  //----------------------------------------------------------------------USERS---------------------------------------------------------------------------------//
 
@@ -103,6 +110,41 @@ app.get('/users/:id',
             res.json(results);
           })
  });
+
+ app.post('/login', (req, res) => {
+  let username = req.body.data.username
+  let password = req.body.data.password
+  console.log(req.body);
+  console.log(username);
+  db.query('SELECT username, password FROM NHLusers WHERE username = ?', [username]).then(dbResults => {
+
+    if(dbResults.length == 0)
+    {
+      res.sendStatus(402);
+    }
+
+    bcrypt.compare(password, dbResults[0].password).then(bcryptResult => {
+      if(bcryptResult == true)
+      {
+        if(dbResults[0].username == username){
+          db.query('SELECT id, username, teamid, goals, assists, email, role, handness FROM NHLusers WHERE username = ?', [username]).then(dbResults2 => {
+            let token = jwt.sign({username: username},"secret",{expiresIn: '10min'});
+            res.json(dbResults2[0]);
+            console.log(token);
+          });
+        }
+        else{
+          res.sendStatus(403);
+        }
+      }
+      else
+      {
+        res.sendStatus(400);
+      }
+    })
+
+  })
+});
 
  //----------------------------------------------------------------------TEAMS---------------------------------------------------------------------------------//
 
@@ -185,7 +227,9 @@ passport.use(new Strategy((username, password, cb) => {
     bcrypt.compare(password, dbResults[0].password).then(bcryptResult => {
       if(bcryptResult == true)
       {
-        cb(null, dbResults[0]);
+        let token = jwt.sign({username: username},"asdasd",{expiresIn: '10min'});
+        cb(null, dbResults[0], token);
+        console.log(token);
       }
       else
       {

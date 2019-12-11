@@ -17,11 +17,8 @@ let Authenticator = {
             }
           })
           .then(result => {
-            UserInfo = {
-              username: username,
-              password: password
-            }
             resolve();
+            console.log(result);
           })
           .catch(error => 
             {
