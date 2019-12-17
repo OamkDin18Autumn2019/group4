@@ -3,7 +3,6 @@ import './HeaderStyle.css';
 import './LoginStyle.css';
 import APIconnection from '../APIconnection.json';
 import axios from 'axios';
-import SignUpForm from './SignUpForm';
 
 
 export default function Header(props) {
@@ -48,33 +47,8 @@ export default function Header(props) {
       });
     }
 
-    //Testing if the user is already logged in and redirecting them back to the homepage
-    function loggedin(){
-      if(sessionStorage.getItem('login') === 'true'){
-        props.loginSuccess();
-        props.setUserInfo(sessionStorage.getItem("id"), sessionStorage.getItem("username"));
-        props.history.push(props.redirectPathOnSuccess);
-        console.log(JSON.stringify(props.location))
-      }
-    }
-
-    function changeSignup(){
-      setShowSignup( { ShowSignup: ShowSignup === "hidden" ? "visible" : "hidden" } );
-      console.log(ShowSignup);
-    }
-
-      /*Authenticator.authenticate(event.target['username'].value, event.target['password'].value)
-        .then(result =>
-          {
-            props.loginSuccess();
-            props.history.push(props.redirectPathOnSuccess);
-          })
-        .catch(() => {
-          props.loginFail();
-        });*/
-
     return (
-        <div onLoad={loggedin()} style={{textAlign: "center", display: "block"}}>
+        <div style={{textAlign: "center", display: "block"}}>
             <div>Hello Hockey World</div>
             <div className="headerbody">
                 <div className="login-container">
@@ -83,14 +57,8 @@ export default function Header(props) {
                         <input type="password" placeholder="Password" name="password" />
                         <button type="submit">Login</button>
                     </form>
-                    
-                    <button className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
                 </div>
             </div>
-          <SignUpForm setUserInfo = { props.setUserInfo } UserInfo={ props.UserInfo } loginSuccess={ props.loginSuccess } redirectPathOnSuccess={ props.redirectPathOnSuccess }/>
         </div>
     )
 }
-
-
-
