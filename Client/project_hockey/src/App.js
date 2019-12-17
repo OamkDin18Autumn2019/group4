@@ -105,10 +105,6 @@ export default class App extends Component {
               <HomePage
                 UserInfo={ this.state.UserInfo }
               />
-
-              <MainWindow
-                UserInfo={ this.state.UserInfo }
-              />
             </div>
           }></ProtectedRoute>
 

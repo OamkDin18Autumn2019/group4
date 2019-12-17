@@ -12,7 +12,7 @@ export default class SearchBar extends Component {
     
 
     filterResults = (event) => {
-        let searchResults = this.state.searchText;
+        var searchResults = this.state.searchText;
         searchResults = searchResults.filter((searchresult) => {
           return searchresult.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
         });

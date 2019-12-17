@@ -21,6 +21,7 @@ export default class VSBlock extends Component  {
           })
   }
   render(){  
+    let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
     return (
       <div className="VSBlock">
         <div>
