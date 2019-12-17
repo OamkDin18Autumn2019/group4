@@ -74,13 +74,15 @@ export default function Header(props) {
         });*/
 
     return (
-        <div onLoad={loggedin()} style={{textAlign: "center", display: "block"}}>
-            <div>Hello Hockey World</div>
-            <div className="headerbody">
+        <div onLoad={loggedin()}>
+            <div className="loginpage">
+                <h1>YETI Hockey</h1>
                 <div className="login-container">
                     <form onSubmit={login}>
                         <input type="text" placeholder="Username" name="username" />
+                        <br></br>
                         <input type="password" placeholder="Password" name="password" />
+                        <br></br>
                         <button type="submit">Login</button>
                     </form>
                     

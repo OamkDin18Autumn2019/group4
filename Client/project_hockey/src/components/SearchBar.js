@@ -31,7 +31,7 @@ export default class SearchBar extends Component {
         return (
             <div>
                 <form>
-                    <input type="text" placeholder="Search" onChange={this.filterResults}/>
+                    <input type="search" placeholder="Search" onChange={this.filterResults}/>
                 </form>
             <div>
                 {
