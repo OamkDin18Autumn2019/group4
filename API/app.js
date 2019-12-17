@@ -69,32 +69,42 @@ app.use((req, res, next) => {
 
  //----------------------------------------------------------------------USERS---------------------------------------------------------------------------------//
 
-app.post('/users', (req, res) => {
-  let username = req.body.username.trim();
-  let password = req.body.password.trim();
-  let email = req.body.email.trim();
-  let role = req.body.role.trim();
-  let handness = req.body.handness.trim();
+app.post('/signup', (req, res) => {
+  let username = req.body.data.username.trim();
+  let password = req.body.data.password.trim();
+  let email = req.body.data.email.trim();
+  let role = req.body.data.role;
+  let handness = req.body.data.handedness;
 
-  if((typeof username === "string") &&
-     (username.length > 4) &&
-     (typeof password === "string") &&
-     (password.length > 6) && 
-     (typeof email === "string"))
-  {
-    bcrypt.hash(password, saltRounds).then(hash =>
-      db.query('INSERT INTO NHLusers (username, password, email, role, handness) VALUES (?,?,?,?,?)', [username, hash, email, role, handness])
-    )
-    .then(dbResults => {
-        console.log(dbResults);
-        res.sendStatus(201);
-    })
-    .catch(error => res.sendStatus(500));
-  }
-  else {
-    console.log("incorrect username or password, both must be strings and username more than 4 long and password more than 6 characters long");
-    res.sendStatus(400);
-  }
+  db.query('SELECT username FROM NHLusers WHERE username = ?', [username]).then(results => {
+
+    if(results.length == 0){
+  
+      if((typeof username === "string") &&
+        (username.length > 4) &&
+        (typeof password === "string") &&
+        (password.length > 6) && 
+        (typeof email === "string"))
+      {
+        bcrypt.hash(password, saltRounds).then(hash =>
+          db.query('INSERT INTO NHLusers (username, password, email, role, handness) VALUES (?,?,?,?,?)', [username, hash, email, role, handness])
+        )
+        .then(dbResults => {
+            console.log(dbResults);
+            res.sendStatus(201);
+        })
+        .catch(error => res.sendStatus(500));
+      }
+      else {
+        console.log("incorrect username or password, both must be strings and username more than 4 long and password more than 6 characters long");
+        res.sendStatus(400);
+      }
+    }
+    else{
+      console.log("Username already taken");
+      res.sendStatus(401);
+    }
+  })
 });
 
 app.get('/users', (req, res) => {
@@ -104,7 +114,7 @@ app.get('/users', (req, res) => {
 });
 
 app.get('/users/:id',
-        passport.authenticate('basic', { session: false }),
+        //passport.authenticate('basic', { session: false }),
         (req, res) => {
           db.query('SELECT id, username, teamid, goals, assists, email, role, handness FROM NHLusers WHERE id = ?', [req.params.id]).then(results => {
             res.json(results);
@@ -146,6 +156,13 @@ app.get('/users/:id',
   })
 });
 
+app.post('/finduser',(req, res) => {
+  let userid = req.body.data.userid
+  db.query('SELECT username FROM NHLusers WHERE id = ?', [userid]).then(results => {
+    res.json(results[0]);
+  })
+});
+
  //----------------------------------------------------------------------TEAMS---------------------------------------------------------------------------------//
 
  app.post('/teams', (req, res) => {
@@ -180,6 +197,31 @@ app.get('/teams/:teamid',(req, res) => {
   })
 });
 
+app.post('/findteam',(req, res) => {
+  let teamid = req.body.data.teamid
+  db.query('SELECT teamid, teamname, teaminfo, teamowner, teamwins, teamlosses FROM NHLteams WHERE teamid = ?', [teamid]).then(results => {
+    res.json(results[0]);
+  })
+});
+
+app.post('/jointeam',(req, res) => {
+  let teamid = req.body.data.teamid
+  let userid = req.body.data.userid
+  db.query('UPDATE NHLusers SET teamid = (?,?) WHERE id = ?', [teamid, userid]).then(dbResults => {
+    console.log(dbResults);
+    res.sendStatus(201);
+  })
+  .catch(error => res.sendStatus(500));
+  });
+
+  app.post('/findmembers',(req, res) => {
+    let teamid = req.body.data.teamid
+    db.query('SELECT username, role FROM NHLusers WHERE teamid = ?', [teamid]).then(results => {
+      res.json(results);
+      console.log(results);
+    })
+  });
+
  //----------------------------------------------------------------------LEAGUES---------------------------------------------------------------------------------//
 
 app.post('/leagues', (req, res) => {
@@ -211,6 +253,14 @@ app.get('/leagues', (req, res) => {
 app.get('/leagues/:leagueid',(req, res) => {
   db.query('SELECT leagueid, leaguename, leagueinfo, leagueowner, teams FROM NHLleagues WHERE leagueid = ?', [req.params.leagueid]).then(results => {
     res.json(results);
+  })
+});
+
+app.post('/getmatches',(req, res) => {
+  let teamid = req.body.data.teamid
+  db.query('SELECT matchid, team1, team2, matchdate, goals1, goals2, scorers, assists FROM NHLmatches WHERE team1 = ? OR team2 =?', [teamid,teamid]).then(results => {
+    res.json(results);
+    console.log(results);
   })
 });
 

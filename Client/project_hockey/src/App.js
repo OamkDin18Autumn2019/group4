@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 import './App.css';
 import Header from './components/NotLoggedinHeader';
+import LoginAfterSignup from './components/LoginAfterSignup';
 import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import MainWindow from './components/MainWindow';
+import MyTeam from './components/MyTeam';
+import MyMatches from './components/MyMatches';
+import UserView from './components/UserView';
 
 
 export default class App extends Component {
@@ -38,22 +42,14 @@ export default class App extends Component {
     this.setState({ UserInfo: { id, username/*, teamid, goals, assists, email, role, handness*/}});
   }
 
-  /*componentDidMount(){
-    if(sessionStorage.getItem('login') === 'true'){
-      this.setState({ isAuthenticated: true });
-      console.log(sessionStorage.getItem('login'));
-      console.log(this.state.isAuthenticated);
-      this.setUserInfo(sessionStorage.getItem("id"), sessionStorage.getItem("username"));
-      this.context.history.push("/HomePage");
-    }
-  }*/
-
+  /*
   componentWillReceiveProps(nextProps) {
     if (nextProps.location !== this.props.location) {
       this.setState({ prevPath: this.props.location })
     }
 
   }
+  */
 
   render(){
     return (
@@ -72,18 +68,71 @@ export default class App extends Component {
             />
           } 
         />
+
+        <Route path="/LoginAfterSignup" exact render={
+          (routeProps) =>
+          
+            <LoginAfterSignup
+              loginSuccess = { this.onLogin }
+              loginFail = { this.onLoginFail }
+              setUserInfo = { this.setUserInfo }
+              location = {this.state.location}
+              redirectPathOnSuccess="/HomePage"
+              {...routeProps}
+            />
+          } 
+        />
+
+        <ProtectedRoute isAuthenticated={this.state.isAuthenticated} path="/users/:id" exact render={
+          (routeProps) =>
+          
+            <UserView
+              loginSuccess = { this.onLogin }
+              loginFail = { this.onLoginFail }
+              setUserInfo = { this.setUserInfo }
+              location = {this.state.location}
+              UserInfo={ this.state.UserInfo }
+              redirectPathOnSuccess="/HomePage"
+              {...routeProps}
+            />
+          } 
+        />
+
         <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/HomePage" exact render={
             (routeProps) =>
             <div>
+
               <HomePage
                 UserInfo={ this.state.UserInfo }
               />
+
               <MainWindow
                 UserInfo={ this.state.UserInfo }
-              /> </div>
-          }>   
-             
-        </ProtectedRoute>
+              />
+            </div>
+          }></ProtectedRoute>
+
+        <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/MyTeam" exact render={
+            (routeProps) =>
+            <div>
+
+              <MyTeam
+                UserInfo={ this.state.UserInfo }
+              /> 
+            </div>
+            
+          }></ProtectedRoute>
+
+          <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/MyMatches" exact render={
+            (routeProps) =>
+            <div>
+
+              <MyMatches
+                UserInfo={ this.state.UserInfo }
+              /> 
+            </div>
+            
+          }></ProtectedRoute>
       </Router>
         
       
