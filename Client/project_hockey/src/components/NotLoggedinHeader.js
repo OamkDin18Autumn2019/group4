@@ -54,12 +54,14 @@ export default function Header(props) {
 
     return (
         <div onLoad={loggedin()}>
-            <div>Hello Hockey World</div>
-            <div className="headerbody">
+            <div className="loginpage">
+                <h1>YETI Hockey</h1>
                 <div className="login-container">
                     <form onSubmit={login}>
                         <input type="text" placeholder="Username" name="username" />
+                        <br></br>
                         <input type="password" placeholder="Password" name="password" />
+                        <br></br>
                         <button type="submit">Login</button>
                     </form>
                     <form action="/action_page.php">

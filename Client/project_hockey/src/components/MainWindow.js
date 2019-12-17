@@ -1,6 +1,7 @@
 import React from 'react';
-import CalendarBlock from './CalendarBlock';
-import SearchResults from './SearchResults';
+import VSBlock from './VSBlock';
+import StatsBlock from './StatsBlock';
+
 
 class MainWindow extends React.Component {
 
@@ -10,12 +11,10 @@ class MainWindow extends React.Component {
           <div>
             <h1>Man window man </h1>
             <div>
-              <CalendarBlock UserInfo={this.props.UserInfo} />
+              <VSBlock UserInfo={this.props.UserInfo} />
             </div>
             <div>
-              <div>
-                <SearchResults />
-            </div>
+              <StatsBlock />
             </div>
           </div>
         )

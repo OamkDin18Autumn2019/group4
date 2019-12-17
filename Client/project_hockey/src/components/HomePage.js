@@ -17,7 +17,7 @@ export default function HomePage(props) {
 
       <div style={{ color: "red" }}>
         <strong>Testings</strong>
-      </div>  
+      </div> 
       <BurgerMenu />
     </div>
   )

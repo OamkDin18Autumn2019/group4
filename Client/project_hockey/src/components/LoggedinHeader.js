@@ -19,9 +19,7 @@ export default class Header extends Component {
         axios.get(APIconnection.baseAddress + '/users')
         .then(res =>
             {
-                /*console.log(res);*/
                 this.setState({ search: res.data});
-                console.log(this.state.search);
             })
     }
     
@@ -33,17 +31,17 @@ export default class Header extends Component {
     }
 
     render(){
-        const mappedresults = this.state.search.map((result)=><li key={result.id}>{result.username}</li>);
-        const testi = this.state.search
+        const testi = this.state.search.map(x => x.username)
+        console.log(testi)
         return (
         <div>
             <div>Hello Hockey World</div>
             <div className="headerbody">
 
             <Search content={testi}/> 
+            
 
                 <div className="login-container">
-                    <button type="submit">HAMBURGER</button>
                     <button type="submit" onClick={this.logout}>Logout</button>
                 </div>
             </div>
