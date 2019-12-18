@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './HeaderStyle.css';
 import './LoginStyle.css';
 import APIconnection from '../APIconnection.json';

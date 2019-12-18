@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Header from './LoggedinHeader';
-import BurgerMenu from './BurgerMenu';
 import axios from 'axios';
 import APIconnection from '../APIconnection';
 
@@ -61,7 +60,6 @@ export default function MyMatches(props) {
     <div style={{textAlign: "center"}}>
 
             <Header/>
-            <BurgerMenu />
 
       <div style={{ color: "black" }}>
         {MyMatches.map(match => <div><Link to={ `/teams/${match.team1}` }>{match.team1}</Link> vs <Link to={ `/teams/${match.team2}` }>{match.team2}</Link> on {match.matchdate}</div>)}

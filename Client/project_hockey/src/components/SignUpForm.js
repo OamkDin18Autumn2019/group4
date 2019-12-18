@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import './SignUpForm.css';
 import APIconnection from '../APIconnection.json';
 import axios from 'axios';

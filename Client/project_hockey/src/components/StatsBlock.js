@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import APIconnection from '../APIconnection.json';
 import axios from 'axios';
-import "./StatsBlockStyle.css"
+import "./StatsBlockStyle.css";
 
 export default class StatsBlock extends Component  {
   constructor(props)
@@ -30,11 +31,11 @@ export default class StatsBlock extends Component  {
     var limitplayers = mappedplayers.slice(0,5)
     var players = limitplayers.sort((a, b) => b.goals - a.goals).map
                           ((result, i) => 
-                          <li key={i}>{result.username} {result.goals}</li>);
+                          <li key={i}><Link to={ `/users/${result.id}` }>{result.username}, {result.goals} goals</Link></li>);
     var mappedteams = this.state.teams.map(x => x)
-    var teams = mappedteams.sort((a, b) => a.teamid - b.teamid).map
+    var teams = mappedteams.sort((a, b) => b.teamwins - a.teamwins).map
                           ((result, i) => 
-                          <li key={i}>{result.teamname}</li>);
+                          <li key={i}><Link to={ `/teams/${result.teamid}` }>{result.teamname}, {result.teamwins} wins</Link></li>);
     return (
       <div className="StatsBlock">
         <div>
