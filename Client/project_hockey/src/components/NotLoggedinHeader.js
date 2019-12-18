@@ -25,8 +25,6 @@ export default function Header(props) {
         props.loginSuccess();
         props.setUserInfo(results.data.id, results.data.username);
         sessionStorage.setItem('User', JSON.stringify(results.data));
-        sessionStorage.setItem('username', results.data.username);
-        sessionStorage.setItem('id', results.data.id);
         sessionStorage.setItem('login', true);
         props.history.push(props.redirectPathOnSuccess);
 
