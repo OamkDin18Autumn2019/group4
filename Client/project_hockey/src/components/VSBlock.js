@@ -56,8 +56,7 @@ export default class VSBlock extends Component {
       <div className="VSBlock">
         <div className="vsbox">
           <h1>Next game</h1>
-        </div>
-        <div>
+          <div>
           <img alt="ayeelmao" src={team1image} className="VSBlock_hometeamimg"></img>
         </div>
         <div>
@@ -66,6 +65,8 @@ export default class VSBlock extends Component {
         <div>
           <p>{date}</p>
         </div>
+        </div>
+
       </div>
     )
   }

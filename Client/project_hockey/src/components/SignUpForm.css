@@ -63,3 +63,25 @@
 .form-style-1 .required{
 	color:red;
 }
+
+.easteregg
+{
+	display: flex;
+    justify-content: center;
+	margin-top: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+.easteregg input
+{
+	background-color: #2c2825;
+}
+.field-long
+{
+	background-color: #1d74b5;
+}
+.field-divided
+{
+	background-color: #1d74b5;
+	color: white;
+}
