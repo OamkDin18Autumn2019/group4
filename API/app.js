@@ -158,7 +158,7 @@ app.get('/users/:id',
 
 app.post('/finduser',(req, res) => {
   let userid = req.body.data.userid
-  db.query('SELECT username FROM NHLusers WHERE id = ?', [userid]).then(results => {
+  db.query('SELECT id, username FROM NHLusers WHERE id = ?', [userid]).then(results => {
     res.json(results[0]);
   })
 });
@@ -191,8 +191,8 @@ app.get('/teams', (req, res) => {
   })
 });
 
-app.get('/teams/:teamid',(req, res) => {
-  db.query('SELECT teamid, teamname, teaminfo, teamowner, teamwins, teamlosses FROM NHLteams WHERE teamid = ?', [req.params.teamid]).then(results => {
+app.get('/teams/:id',(req, res) => {
+  db.query('SELECT teamid, teamname, teaminfo, teamowner, teamwins, teamlosses FROM NHLteams WHERE id = ?', [req.params.id]).then(results => {
     res.json(results);
   })
 });
@@ -214,9 +214,19 @@ app.post('/jointeam',(req, res) => {
   .catch(error => res.sendStatus(500));
   });
 
+app.post('/leaveteam',(req, res) => {
+  let userid = req.body.data.userid
+  db.query('UPDATE NHLusers SET teamid = null WHERE id = ?', [userid]).then(dbResults => {
+    console.log(dbResults);
+    res.sendStatus(201);
+    res.json(dbResults);
+  })
+  .catch(error => res.sendStatus(500));
+  });
+
   app.post('/findmembers',(req, res) => {
     let teamid = req.body.data.teamid
-    db.query('SELECT username, role FROM NHLusers WHERE teamid = ?', [teamid]).then(results => {
+    db.query('SELECT id, username, role FROM NHLusers WHERE teamid = ?', [teamid]).then(results => {
       res.json(results);
       console.log(results);
     })

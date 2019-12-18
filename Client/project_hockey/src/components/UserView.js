@@ -8,6 +8,7 @@ export default function UserView(props) {
     const [User, setUser] = useState([]);
     const [Handedness, setHandedness] = useState("");
     const [Role, setRole] = useState("");
+    //const [Points, setPoints]
 
     useEffect(() => { 
         const id = parseInt(props.match.params.id);
@@ -31,31 +32,33 @@ export default function UserView(props) {
 
                 if(User.length == 1){
                     console.log(User[0]);
-                    if(User[0].handness === "0"){
+                    console.log(User[0].handedness);
+                    if(User[0].handness === 0){
                         setHandedness("Righthanded");
                     }
                     else{
                         setHandedness("Lefthanded");
                     }
 
-                    if(User[0].role === "0"){
+                    if(User[0].role === 0){
                         setRole("Center");
                     }
-                    else if(User[0].role === "1"){
+                    else if(User[0].role === 1){
                         setRole("Left Winger");
                     }
-                    else if(User[0].role === "2"){
+                    else if(User[0].role === 2){
                         setRole("Right Winger");
                     }
-                    else if(User[0].role === "3"){
+                    else if(User[0].role === 3){
                         setRole("Left Defenseman");
                     }
-                    else if(User[0].role === "4"){
+                    else if(User[0].role === 4){
                         setRole("Right Defenseman");
                     }
                     else{
                         setRole("Goalie")
                     }
+                    console.log(User[0].goals + User[0].assists)
                 }
                 else{
                     setUser(Users);
@@ -81,8 +84,10 @@ export default function UserView(props) {
                 <div>
                     <div>
                         
-                        <h2>{ Handedness }</h2>
-                        <h2> { Role } </h2>
+                        {User.map(user => <h1>{user.username}</h1>)} 
+                        <h2>{ Handedness } { Role }</h2>
+                        <h3>Stats</h3>
+                        {User.map(user => <p>{user.goals} goals and {user.assists} assists</p>)}  
 
                     <div>
                 </div>

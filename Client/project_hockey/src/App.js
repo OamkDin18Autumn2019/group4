@@ -7,8 +7,11 @@ import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import MainWindow from './components/MainWindow';
 import MyTeam from './components/MyTeam';
+import ManageTeam from './components/ManageTeam';
 import MyMatches from './components/MyMatches';
 import UserView from './components/UserView';
+import TeamView from './components/TeamView';
+import NoTeam from './components/NoTeam';
 
 
 export default class App extends Component {
@@ -98,6 +101,36 @@ export default class App extends Component {
           } 
         />
 
+        <ProtectedRoute isAuthenticated={this.state.isAuthenticated} path="/teams/:id" exact render={
+          (routeProps) =>
+          
+            <TeamView
+              loginSuccess = { this.onLogin }
+              loginFail = { this.onLoginFail }
+              setUserInfo = { this.setUserInfo }
+              location = {this.state.location}
+              UserInfo={ this.state.UserInfo }
+              redirectPathOnSuccess="/HomePage"
+              {...routeProps}
+            />
+          } 
+        />
+
+        <ProtectedRoute isAuthenticated={this.state.isAuthenticated} path="/NoTeam" exact render={
+          (routeProps) =>
+          
+            <NoTeam
+              loginSuccess = { this.onLogin }
+              loginFail = { this.onLoginFail }
+              setUserInfo = { this.setUserInfo }
+              location = {this.state.location}
+              UserInfo={ this.state.UserInfo }
+              redirectPathOnSuccess="/HomePage"
+              {...routeProps}
+            />
+          } 
+        />
+
         <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/HomePage" exact render={
             (routeProps) =>
             <div>
@@ -128,6 +161,17 @@ export default class App extends Component {
             <div>
 
               <MyMatches
+                UserInfo={ this.state.UserInfo }
+              /> 
+            </div>
+            
+          }></ProtectedRoute>
+
+          <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/ManageTeam" exact render={
+            (routeProps) =>
+            <div>
+
+              <ManageTeam
                 UserInfo={ this.state.UserInfo }
               /> 
             </div>
