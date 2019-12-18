@@ -1,0 +1,10 @@
+.searchresult
+{
+    display: none;
+    position: relative;
+}
+.searchresult li
+{
+    display: none;
+    position: relative;
+}

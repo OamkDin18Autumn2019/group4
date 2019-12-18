@@ -12,8 +12,7 @@ export default class Header extends Component {
     {
       super(props);
       this.state = {
-        search: [],
-        searchyay: []
+        search: []
       };
     }  
     componentDidMount()
@@ -35,15 +34,16 @@ export default class Header extends Component {
     }
 
     render(){
-        const aye = this.state.searchyay.push(this.state.search.map(x=> x.username))
-        const test = ["moi"]
-        console.log(this.state.searchyay)
+        const aye = this.state.search.map(x=> x.username)
+        const placeholder = this.state.searchyay
+        const test = ["Mäntylä Mooses", "Kaukovainio Lions","Mäntylä Mooses", "Kaukovainio Lions","Mäntylä Mooses", "Kaukovainio Lions"]
+        console.log(placeholder)
         return (
         <div>
             <div>Hello Hockey World</div>
             <div className="headerbody">
 
-            <Search content={[this.state.searchyay]}/> 
+            <Search content={test}/> 
             
 
                 <div className="login-container">
