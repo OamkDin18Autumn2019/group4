@@ -16,3 +16,22 @@
     position: relative;
 
 }
+
+.searchbar {
+    background-color: rgb(255, 255, 255);
+    border-radius: 60px 60px 60px 60px;
+    width: 200px;
+}
+
+.searchbar:focus {
+    background-color: rgb(255, 255, 255);
+    border-radius: 60px 60px 60px 60px;
+    width: 200px;
+    outline: none;
+}
+
+
+input::placeholder {
+    color: rgb(228, 228, 228);
+    padding-left: 13px;
+}
