@@ -11,13 +11,17 @@ export default function MyTeam(props) {
     let ParsedTeam = JSON.parse(sessionStorage.getItem("Team"));
     const [UserTeam, setUserTeam] = useState("");
     const [TeamOwner, setTeamOwner] = useState("");
+    const [OwnerId, setOwnerId] = useState([]);
     const [TeamMembers, setTeamMembers] = useState([]);
     //const [showManagement, setShowManagement] = useState("");
 
+    
+    console.log(ParsedUser.teamid);
+
     useEffect(() => {
       if(ParsedUser.teamid === null){
-        console.log(null);
-        setUserTeam(null);
+        console.log("null");
+        setUserTeam("null");
       }
       else{
         console.log(ParsedUser.teamid);
@@ -29,6 +33,7 @@ export default function MyTeam(props) {
           }
         }).then(results => {
           setTeamOwner(results.data.username);
+          setOwnerId(results.data.id);
         });
 
         axios.post(APIconnection.baseAddress + '/findmembers', {
@@ -36,9 +41,10 @@ export default function MyTeam(props) {
               teamid: ParsedTeam.teamid
           }
         }).then(results => {
-
+          console.log(results.data);
           let TeamUsers = results.data.map((info) => {
             const Member_Info = {
+                id: info.id,
                 username: info.username,
                 role: info.role
             }
@@ -56,9 +62,22 @@ export default function MyTeam(props) {
       }
     });
 
+    function leaveteam(){
+      axios.post(APIconnection.baseAddress + '/leaveteam', {
+        data: {
+            userid: ParsedUser.id
+        }
+      }).then(results => {
+        window.location.reload();
+        sessionStorage.removeItem("Team");
+      });
+
+    }
+
     //Testing if the user is in a team and then showing relevant information to the user
     function testteam(){
-        if(UserTeam === null){
+        
+        if(ParsedUser.teamid === null){
             console.log("null");
             
             return(
@@ -85,14 +104,16 @@ export default function MyTeam(props) {
                         <br></br>
                     <h3>{ParsedTeam.teaminfo}</h3>
                         <br></br>
-                    The owner of this team is {TeamOwner}
+                    The owner of this team is <Link to={ `/users/${OwnerId}` }>{TeamOwner}</Link>
                         <br></br>
                     <h3>Stats:</h3> 
                     <a style={{ color: "green" }}> Wins: {ParsedTeam.teamwins} </a>
                     <a style={{ color: "red" }}> Losses: {ParsedTeam.teamlosses} </a>
                         <br></br>
 
-                    Members: {TeamMembers.map(member => <div>{member.username}</div>)}
+                    Members: {TeamMembers.map(member => <div><Link to={ `/users/${member.id}` }>{member.username}</Link></div>)}
+                        <br></br>
+                    <button onClick={leaveteam}>Leave team</button>
 
                 </div>
             )
