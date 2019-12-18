@@ -7,7 +7,7 @@ export default function BurgerMenu() {
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
 
     function userteam(){
-        if(ParsedUser.teamid === null){
+        if(ParsedUser.teamid === null || ParsedUser.teamid === ""){
             return (<li><Link to="/NoTeam" >My Team</Link></li>)
         }
         else{
@@ -27,8 +27,6 @@ export default function BurgerMenu() {
                     <span></span>
 
                     <ul id="menu">
-                        <a href="#"><li>Option 1</li></a>
-                        <a href="#"><li>Option 2</li></a>
                         <li><Link to={ `/users/${ParsedUser.id}` }>My Profile</Link></li>
                         <li><Link to="../MyMatches">My Matches</Link></li>
                         {userteam()}

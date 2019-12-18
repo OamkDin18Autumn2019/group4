@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Header from './LoggedinHeader';
-import BurgerMenu from './BurgerMenu';
 import axios from 'axios';
 import APIconnection from '../APIconnection';
 
@@ -10,6 +9,7 @@ export default function MyMatches(props) {
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
     const [MyMatches, setMyMatches] = useState([]);
 
+    //When component mounts, send POST calls to API where it fetches all the matches set for users team
     useEffect(() => { 
       axios.post(APIconnection.baseAddress + '/getmatches', {
         data: {
@@ -47,25 +47,27 @@ export default function MyMatches(props) {
       });
     });
 
-  function showmatches(){
-
-      return(
-          <div>
-
-          </div>
-      )
-  
-  }
-
+  //Matches page
   return (
     <div style={{textAlign: "center"}}>
 
             <Header/>
-            <BurgerMenu />
 
-      <div style={{ color: "black" }}>
-        {MyMatches.map(match => <div><Link to={ `/teams/${match.team1}` }>{match.team1}</Link> vs <Link to={ `/teams/${match.team2}` }>{match.team2}</Link> on {match.matchdate}</div>)}
+      <div className="playedmatches">
+        {MyMatches.map((match, i, x) =>
+          <div > 
+          <Link key={i} to={ `/teams/${match.team1}` }>{match.team1}</Link> vs <Link key={x} to={ `/teams/${match.team2}` }>{match.team2}</Link> on {match.matchdate.slice(0,10)}
+          </div>
+          )}
       </div>  
+
+      <div className="upcomingmatches">
+      {MyMatches.map((match, i, x) =>
+        <div > 
+        <Link key={i} to={ `/teams/${match.team1}` }>{match.team1}</Link> vs <Link key={x} to={ `/teams/${match.team2}` }>{match.team2}</Link> on {match.matchdate.slice(0,10)}
+        </div>
+        )}
+    </div>  
     
     </div>
   )

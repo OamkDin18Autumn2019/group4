@@ -14,13 +14,14 @@ export default function Header(props) {
     event.preventDefault();
     props.setUserInfo("null");
 
-    //Sending a post request to the API with input username and password as payload
-    axios.post(APIconnection.baseAddress + '/login', {
-      data: {
-        username: event.target['username'].value,
-        password: event.target['password'].value
-      }
-    }) //If the API approves the login, the client will store these values for later use
+      //Sending a post request to the API with input username and password as payload.
+      axios.post(APIconnection.baseAddress + '/login', {
+        data: {
+            username: event.target['username'].value,
+            password: event.target['password'].value
+        }
+      }) //If the API approves the login, the client will store these values for later use.
+
       .then(results => {
         props.loginSuccess();
         props.setUserInfo(results.data.id, results.data.username);
@@ -28,7 +29,9 @@ export default function Header(props) {
         sessionStorage.setItem('login', true);
         props.history.push(props.redirectPathOnSuccess);
 
-        if (results.data.teamid === null) {
+        //Checking if user is in a team and  if so, storing the team values.
+        if(results.data.teamid === null){
+
 
         }
         else {
@@ -40,18 +43,16 @@ export default function Header(props) {
             sessionStorage.setItem('Team', JSON.stringify(results.data));
           });
         }
-
-        console.log(results.data.username);
       });
   }
-
-  //Testing if the user is already logged in and redirecting them back to the homepage
-  function loggedin() {
-    if (sessionStorage.getItem('login') === 'true') {
-      props.loginSuccess();
-      props.setUserInfo(sessionStorage.getItem("id"), sessionStorage.getItem("username"));
-      props.history.push(props.redirectPathOnSuccess);
-      console.log(JSON.stringify(props.location))
+    //Testing if the user is already logged in and redirecting them back to the homepage.
+    function loggedin(){
+      if(sessionStorage.getItem('login') === 'true'){
+        props.loginSuccess();
+        props.setUserInfo(sessionStorage.getItem("id"), sessionStorage.getItem("username"));
+        props.history.push(props.redirectPathOnSuccess);
+        console.log(JSON.stringify(props.location))
+      }
     }
   }
 
@@ -91,6 +92,7 @@ export default function Header(props) {
             <button type="submit">Login</button>
           </form>
           <button className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
+
         </div>
       </div>
       <div id="signup-div">

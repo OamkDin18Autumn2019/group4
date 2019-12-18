@@ -20,17 +20,18 @@ export default class Header extends Component {
             .then(res => {
                 this.setState({ search: res.data });
             }
-            )
+    //Logging out by clearing the storage and reloading the page to redirect to login page
+    logout()
+    {
 
-    }
-
-    logout() {
         sessionStorage.clear();
         window.location.reload();
-        console.log("Logged out");
     }
 
     render() {
+
+    render(){
+        //Header for main page
         return (
             <div>
                 <div>
@@ -52,34 +53,4 @@ export default class Header extends Component {
         )
     }
 }
-    /*
 
-export default function Header(props)
-{
-
-function logout()
-{
-sessionStorage.clear();
-window.location.reload();
-console.log("Logged out");
-
-}
-
-render (){
-const mappedresults = this.state.search.map((result)=><li key={result.id}>{result.username}</li>);
-const testi = this.state.search
-return (
-<div>
-<div>Hello Hockey World</div>
-<div className="headerbody">
-
-<Search content={testi}/>
-
-<div className="login-container">
-<button type="submit">HAMBURGER</button>
-<button type="submit" onClick={logout}>Logout</button>
-</div>
-</div>
-</div>
-)}
-}*/
