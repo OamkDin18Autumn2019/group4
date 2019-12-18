@@ -14,6 +14,11 @@ export default function BurgerMenu() {
             return (<li><Link to={ `/teams/${ParsedUser.teamid}` }>My Team</Link></li>)
         }
     }
+    function logout()
+    {
+        sessionStorage.clear();
+        window.location.reload();
+    }
     return (
         <div>
 
@@ -30,6 +35,7 @@ export default function BurgerMenu() {
                         <li><Link to={ `/users/${ParsedUser.id}` }>My Profile</Link></li>
                         <li><Link to="../MyMatches">My Matches</Link></li>
                         {userteam()}
+                        <li onClick={logout}><Link style={{color:"red"}}>Logout</Link></li>
                     </ul>
                 </div>
             </nav>

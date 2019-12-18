@@ -54,7 +54,6 @@ export default function Header(props) {
         console.log(JSON.stringify(props.location))
       }
     }
-  }
 
   function changeSignup() {
     document.getElementById("login-div").style.display = "none";
@@ -79,29 +78,35 @@ export default function Header(props) {
     <div onLoad={loggedin()}>
       <div className="loginpage">
         <div>
-          <div className="hockeylogo">
-            <img className="yetiLogo" src={hockeylogo} />
+          <div className="hockeylogo2">
+            <img className="yetiLogo2" src={hockeylogo} />
           </div>
         </div>
         <div id="login-div" className="login-container">
           <form onSubmit={login}>
-            <input type="text" placeholder="Username" name="username" />
+            <input className="loginman" type="text" placeholder="Username" name="username" />
             <br></br>
-            <input type="password" placeholder="Password" name="password" />
+            <input className="loginman" type="password" placeholder="Password" name="password" />
             <br></br>
-            <button type="submit">Login</button>
+            <button style={{backgroundColor:"#2c2825"}} type="submit">Login</button>
           </form>
-          <button className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
+          <div className="signup_div">
+          <button style={{backgroundColor:"#2c2825"}} className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
+          </div>
 
         </div>
       </div>
       <div id="signup-div">
         <SignUpForm setUserInfo={props.setUserInfo} UserInfo={props.UserInfo} loginSuccess={props.loginSuccess} redirectPathOnSuccess={props.redirectPathOnSuccess} />
+        <div className="exist_div">
         <button className="existing-button" type="submit" onClick={changeSignup2}>Already have an account?</button>
+        </div>
+        
       </div>
     </div>
   )
-}
+  }
+
 
 
 

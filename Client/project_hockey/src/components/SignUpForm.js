@@ -80,7 +80,7 @@ export default function SignUpForm(props) {
                     <li><label>Password <span className="required">*</span></label><input type="password" name="password" className="field-long" placeholder="Password"/></li>
 
                     <li>
-                        <input type="submit" value="Submit" />
+                        <input style={{backgroundColor:"#2c2825"}} className="easteregg" type="submit" value="Submit" />
                     </li>
                 </ul>
             </form>
