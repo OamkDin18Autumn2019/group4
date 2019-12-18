@@ -6,6 +6,8 @@ import axios from 'axios';
 
 export default function SignUpForm(props) {
 
+    console.log(props.redirectPathOnSuccess);
+
     function signup(event){
         event.preventDefault();
         props.setUserInfo("null");
@@ -29,32 +31,31 @@ export default function SignUpForm(props) {
           sessionStorage.setItem('login', true);
           props.history.push(props.redirectPathOnSuccess);*/
 
-          console.log(results.data)
-        
-          if(results.data === "Created"){
-              console.log("created");
-              return <Redirect to="/LoginAfterSignup"/>
-          }
-          else{
-              console.log(results.data)
-          }
-  
-          /*if(results.data.teamid === null){
-  
-          }
-          else{
-            axios.post(APIconnection.baseAddress + '/findteam', {
-              data: {
-                  teamid: results.data.teamid
-              }
-            }).then(results => {
-                sessionStorage.setItem('Team', JSON.stringify(results.data));
-            });
-          }
-  
-          console.log(results.data.username);*/
+            console.log(results.data)
+            
+            if(results.data === "Created"){
+                console.log("created");
+                document.getElementById("login-div").style.display = "block";
+                document.getElementById("signup-div").style.display = "none";
+                alert("User created. Please login to access the site.")
+            }
+            else if(results.data === "password"){
+                alert("Please choose a longer password (>6 characters).");
+                console.log("password is too short");
+            }
+            else if(results.data === "username"){
+                alert("Please choose a longer username (>4 characters).");
+                console.log("username is too short");
+            }
+            else if(results.data === "taken"){
+                alert("This username is already taken. Please choose another one.");
+                console.log("username is taken");
+            }
+            else{
+                alert("Something went wrong. Please try again.")
+            }
+
         });
-        //style={{visibility: "hidden"}}
     }
 
     return (

@@ -9,7 +9,7 @@ export default function NoTeam(props) {
 
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
 
-    function createteam(event){
+    function jointeam(event){
         event.preventDefault();
   
         //Sending a post request to the API with input teamname & teaminfo and userid as payload
@@ -35,14 +35,6 @@ export default function NoTeam(props) {
       <div style={{ color: "black" }}>
 
         You aren't in a team. You can join one here: <br></br>
-
-
-        or create your own here: <br></br>
-        <form onSubmit={createteam} id="creation">
-            <input type="text" placeholder="Team name" name="teamname" />
-            <textarea placeholder="Enter info about your team here.." name="teaminfo" form="creation"></textarea>
-            <button type="submit">Create Team</button>
-        </form>
 
       </div>  
       <BurgerMenu />
