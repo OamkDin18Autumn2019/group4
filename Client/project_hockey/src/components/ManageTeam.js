@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import Header from './LoggedinHeader';
-import BurgerMenu from './BurgerMenu';
-import axios from 'axios';
-import APIconnection from '../APIconnection';
+//import axios from 'axios';
+//import APIconnection from '../APIconnection';
 
 export default function ManageTeam(props) {
     useEffect(() => { 

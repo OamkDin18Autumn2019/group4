@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Header from './LoggedinHeader';
-import BurgerMenu from './BurgerMenu';
 import axios from 'axios';
 import APIconnection from '../APIconnection';
 
@@ -12,7 +11,6 @@ export default function TeamView(props) {
     const [TeamOwner, setTeamOwner] = useState("");
     const [OwnerId, setOwnerId] = useState([]);
     const [TeamMembers, setTeamMembers] = useState([]);
-    //const [Points, setPoints]
 
     useEffect(() => { 
         const id = parseInt(props.match.params.id);
@@ -31,7 +29,7 @@ export default function TeamView(props) {
                 }
                     return Team_Info;
                 });
-                if(Team.length == 1){
+                if(Team.length === 1){
                     console.log(Team[0]);
 
                     axios.post(APIconnection.baseAddress + '/finduser', {
@@ -58,7 +56,7 @@ export default function TeamView(props) {
                             return Member_Info;
                         });
                     
-                        if(TeamMembers.length == 0){
+                        if(TeamMembers.length === 0){
                             setTeamMembers(TeamUsers);
                         }
                         else{
@@ -67,7 +65,7 @@ export default function TeamView(props) {
                     });
 
                     if(Team[0].teamowner === ParsedUser.id){
-                        //setHandedness("Righthanded");
+                        //manage;
                     }
                     else{
 
@@ -83,7 +81,37 @@ export default function TeamView(props) {
         });
     });
 
-    function leaveteam(){
+    function noteam(){
+        function jointeam(){
+            console.log(ParsedUser.id + "id")
+            console.log(parseInt(props.match.params.id) + "team")
+            axios.post(APIconnection.baseAddress + "/jointeam", {
+                data: {
+                    userid: ParsedUser.id,
+                    teamid: parseInt(props.match.params.id)
+                }
+            }).then(results => {
+                console.log(results);
+                console.log(results.data);
+            });
+
+            function update(value){
+                let prevData = JSON.parse(sessionStorage.getItem('User'));
+
+                Object.keys(value).forEach(function(val, key){
+                    prevData[val] = value[val];
+                })
+                sessionStorage.setItem('User', JSON.stringify(prevData));
+            }
+            update({teamid: parseInt(props.match.params.id)})
+        }
+
+        if(ParsedUser.teamid === null || ParsedUser.teamid === ""){
+            return(<button onClick={jointeam}>JOIN THIS TEAM</button>)
+        }
+    }
+
+    /*function leaveteam(){
         axios.post(APIconnection.baseAddress + '/leaveteam', {
             data: {
                 userid: ParsedUser.id
@@ -94,7 +122,7 @@ export default function TeamView(props) {
           
         });
   
-      }
+    }*/
 
     return (
     <div style={{textAlign: "center"}}>
@@ -104,25 +132,21 @@ export default function TeamView(props) {
         <div style={{ color: "black" }}>
 
             <div>
-                <button onClick={() => props.history.goBack()}>Back</button>
                 <div>
-                    <div>
-                        
-                        {Team.map(team => <div><h1>{team.teamname}</h1> <br/> <h3>{team.teaminfo}</h3></div>)} 
-                        The owner of this team is <Link to={ `/users/${OwnerId}` }>{TeamOwner}</Link>
-                        <h3>Stats:</h3>
-                        {Team.map(team => <div><a style={{ color: "green" }}>{team.teamwins} wins</a> and <a style={{ color: "red" }}> {team.teamlosses} losses</a></div>)} 
-                        Members: {TeamMembers.map(member => <div><Link to={ `/users/${member.id}` }>{member.username}</Link></div>)}
-                        <br></br>
-                        <button onClick={leaveteam}>Leave team</button> 
-
-                    <div>
-                </div>
+                    
+                    {Team.map(team => <div><h1>{team.teamname}</h1> <br/> <h3>{team.teaminfo}</h3></div>)} 
+                    The owner of this team is <Link to={ `/users/${OwnerId}` }>{TeamOwner}</Link>
+                    <h3>Stats:</h3>
+                    {Team.map(team => <div><a style={{ color: "green" }}>{team.teamwins} wins</a> and <a style={{ color: "red" }}> {team.teamlosses} losses</a></div>)} 
+                    Members: {TeamMembers.map(member => <div><Link to={ `/users/${member.id}` }>{member.username}</Link></div>)}
+                    <br></br>
+                    {noteam()}
+                    
+                <div>
             </div>
         </div>
         </div>
         </div>
-        <BurgerMenu />
     </div>
   )
 }
