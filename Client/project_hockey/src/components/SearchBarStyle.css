@@ -1,10 +1,18 @@
+.searchResults
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    left: 49%;
+    margin-left: -50px;
+    background: white;
+    width: auto;
+    border: brown;
+}
 .searchresult
 {
     display: none;
     position: relative;
-}
-.searchresult li
-{
-    display: none;
-    position: relative;
+
 }
