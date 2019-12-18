@@ -80,29 +80,36 @@ app.post('/signup', (req, res) => {
 
     if(results.length == 0){
   
-      if((typeof username === "string") &&
-        (username.length > 4) &&
-        (typeof password === "string") &&
+      if((typeof password === "string") &&
         (password.length > 6) && 
-        (typeof email === "string"))
-      {
-        bcrypt.hash(password, saltRounds).then(hash =>
-          db.query('INSERT INTO NHLusers (username, password, email, role, handness) VALUES (?,?,?,?,?)', [username, hash, email, role, handness])
-        )
-        .then(dbResults => {
-            console.log(dbResults);
-            res.sendStatus(201);
-        })
-        .catch(error => res.sendStatus(500));
+        (typeof email === "string")){
+
+        if((typeof username === "string") &&
+        (username.length > 4)){
+
+          bcrypt.hash(password, saltRounds).then(hash =>
+            db.query('INSERT INTO NHLusers (username, password, email, role, handness) VALUES (?,?,?,?,?)', [username, hash, email, role, handness])
+          )
+          .then(dbResults => {
+              console.log(dbResults);
+              res.sendStatus(201);
+          })
+          .catch(error => res.sendStatus(500));
+        }
+        else{
+          console.log("username");
+          res.json("username");
+
+        }
       }
       else {
-        console.log("incorrect username or password, both must be strings and username more than 4 long and password more than 6 characters long");
-        res.sendStatus(400);
+        console.log("password");
+        res.json("password");
       }
     }
     else{
-      console.log("Username already taken");
-      res.sendStatus(401);
+      console.log("taken");
+      res.json("taken");
     }
   })
 });
@@ -192,7 +199,7 @@ app.get('/teams', (req, res) => {
 });
 
 app.get('/teams/:id',(req, res) => {
-  db.query('SELECT teamid, teamname, teaminfo, teamowner, teamwins, teamlosses FROM NHLteams WHERE id = ?', [req.params.id]).then(results => {
+  db.query('SELECT teamid, teamname, teaminfo, teamowner, teamwins, teamlosses FROM NHLteams WHERE teamid = ?', [req.params.id]).then(results => {
     res.json(results);
   })
 });
