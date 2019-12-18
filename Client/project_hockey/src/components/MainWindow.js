@@ -11,7 +11,7 @@ class MainWindow extends React.Component {
           <div>
             <h1>Man window man </h1>
             <div>
-              <VSBlock UserInfo={this.props.UserInfo} />
+              <VSBlock />
             </div>
             <div>
               <StatsBlock />

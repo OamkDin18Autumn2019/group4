@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom';
+import "./SearchBarStyle.css";
 
 export default class SearchBar extends Component {
         constructor(props)
@@ -12,32 +14,53 @@ export default class SearchBar extends Component {
     
 
     filterResults = (event) => {
-        let searchResults = this.state.searchText;
+        var searchResults = this.state.searchText;
         searchResults = searchResults.filter((searchresult) => {
           return searchresult.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
         });
         this.setState({searchResults: searchResults});
-        console.log(searchResults)
+        
       }
-
+    
     componentDidMount = () => {
         this.setState({
             searchText: this.props.content,
             searchResults: this.props.content
         })
-     }   
+     }  
+     
+     searchToggle = () =>
+     {
+        var elements = document.getElementsByClassName("searchresult");
+        var bar = document.getElementById("searchbar_id");
 
+        if (bar.value == "")
+        {
+            for (var i=0;i<elements.length;i+=1)
+            {
+                elements[i].style.display = 'none';
+            }
+        }
+        else
+        {
+            for (var i=0;i<elements.length;i+=1)
+            {
+                elements[i].style.display = 'block';
+            }
+        }
+     }
+     
     render() {
         return (
             <div>
                 <form>
-                    <input type="search" placeholder="Search" onChange={this.filterResults}/>
+                    <input className="searchbar" type="text" placeholder="Search" id="searchbar_id"
+                    onKeyUp={this.searchToggle} onKeyDown={this.searchToggle} onChange={this.filterResults}/>
                 </form>
-            <div>
+            <div className=>
                 {
-                this.state.searchResults.map(function(searchresult) {
-                    return <div key={searchresult}>{searchresult}</div>
-                })
+                this.state.searchResults.map((x,i)=> 
+                <li className="searchresult" key={i}><Link to="MyMatches">{x}</Link></li>)
                 }
                 </div>
             </div>  

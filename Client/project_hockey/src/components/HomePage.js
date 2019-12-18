@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './LoggedinHeader';
-import BurgerMenu from './BurgerMenu';
+import MainWindow from './MainWindow';
 
 export default function HomePage(props) {
 
@@ -9,16 +9,12 @@ export default function HomePage(props) {
 
   return (
     <div style={{textAlign: "center"}}>
-            <Header/>
+      <Header/>
 
       <h1>Hello {ParsedUser.username}!</h1>
 
-      {sessionStorage.getItem("User")} 
+      <MainWindow />
 
-      <div style={{ color: "red" }}>
-        <strong>Testings</strong>
-      </div> 
-      <BurgerMenu />
     </div>
   )
 }

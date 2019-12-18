@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import APIconnection from '../APIconnection.json';
 import axios from 'axios';
+import "./StatsBlockStyle.css"
 
 export default class StatsBlock extends Component  {
   constructor(props)
@@ -25,8 +26,12 @@ export default class StatsBlock extends Component  {
           })
   }
   render(){ 
+    let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
+    let ParsedTeam = JSON.parse(sessionStorage.getItem("Team"));
     var mappedplayers = this.state.users.map(x => x)
-    var players = mappedplayers.sort((a, b) => a.goals - b.goals).map
+    var filterplayers = mappedplayers.filter(function(filterplayer){return filterplayer.teamid == ParsedUser.teamid})
+    var limitplayers = filterplayers.slice(0,5)
+    var players = limitplayers.sort((a, b) => b.goals - a.goals).map
                           ((result, i) => 
                           <li key={i}>{result.username} {result.goals}</li>);
     var mappedteams = this.state.teams.map(x => x)
@@ -42,7 +47,7 @@ export default class StatsBlock extends Component  {
           </ul>
         </div>
         <div>
-          <h2>Player Stats</h2>
+          <h2>{"hei"} TOP scorers</h2>
           <ul>
               {players}
           </ul>

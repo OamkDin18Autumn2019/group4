@@ -4,6 +4,7 @@ import './LoginStyle.css';
 import Search from './SearchBar';
 import axios from 'axios';
 import APIconnection from '../APIconnection.json';
+import BurgerMenu from './BurgerMenu';
 
 
 export default class Header extends Component {
@@ -20,7 +21,9 @@ export default class Header extends Component {
         .then(res =>
             {
                 this.setState({ search: res.data});
-            })
+            }
+            )
+        
     }
     
     logout()
@@ -31,20 +34,23 @@ export default class Header extends Component {
     }
 
     render(){
-        const testi = this.state.search.map(x => x.username)
-        console.log(testi)
+        const aye = this.state.search.map(x=> x.username)
+        const placeholder = this.state.searchyay
+        const test = ["Mäntylä Mooses", "Kaukovainio Lions","Mäntylä Mooses", "Kaukovainio Lions","Mäntylä Mooses", "Kaukovainio Lions"]
+        console.log(placeholder)
         return (
         <div>
             <div>Hello Hockey World</div>
             <div className="headerbody">
 
-            <Search content={testi}/> 
+            <Search content={test}/> 
             
 
                 <div className="login-container">
                     <button type="submit" onClick={this.logout}>Logout</button>
                 </div>
             </div>
+            <BurgerMenu />
         </div>
     )}
 }

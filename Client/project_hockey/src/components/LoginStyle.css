@@ -63,3 +63,19 @@
       border: 1px solid #ccc;
     }
   }
+
+  #signup-div
+  {
+    display:none;
+  }
+
+  .existing-button
+  {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }

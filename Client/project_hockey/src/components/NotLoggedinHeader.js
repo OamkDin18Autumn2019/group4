@@ -8,7 +8,6 @@ import SignUpForm from './SignUpForm';
 
 export default function Header(props) {
 
-  const [ShowSignup, setShowSignup] = useState("hidden");
 
     function login(event)
     {    
@@ -59,9 +58,13 @@ export default function Header(props) {
     }
 
     function changeSignup(){
-      setShowSignup( { ShowSignup: ShowSignup === "hidden" ? "visible" : "hidden" } );
-      console.log(ShowSignup);
+       document.getElementById("login-div").style.display = "none";
+       document.getElementById("signup-div").style.display = "block" 
     }
+    function changeSignup2(){
+      document.getElementById("login-div").style.display = "block";
+      document.getElementById("signup-div").style.display = "none" 
+   }
 
       /*Authenticator.authenticate(event.target['username'].value, event.target['password'].value)
         .then(result =>
@@ -77,7 +80,7 @@ export default function Header(props) {
         <div onLoad={loggedin()}>
             <div className="loginpage">
                 <h1>YETI Hockey</h1>
-                <div className="login-container">
+                <div id="login-div" className="login-container">
                     <form onSubmit={login}>
                         <input type="text" placeholder="Username" name="username" />
                         <br></br>
@@ -85,11 +88,13 @@ export default function Header(props) {
                         <br></br>
                         <button type="submit">Login</button>
                     </form>
-                    
                     <button className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
                 </div>
             </div>
-          <SignUpForm setUserInfo = { props.setUserInfo } UserInfo={ props.UserInfo } loginSuccess={ props.loginSuccess } redirectPathOnSuccess={ props.redirectPathOnSuccess }/>
+            <div id="signup-div">
+              <SignUpForm  setUserInfo = { props.setUserInfo } UserInfo={ props.UserInfo } loginSuccess={ props.loginSuccess } redirectPathOnSuccess={ props.redirectPathOnSuccess }/>
+              <button className="existing-button" type="submit" onClick={changeSignup2}>Already have an account?</button>
+            </div>
         </div>
     )
 }
