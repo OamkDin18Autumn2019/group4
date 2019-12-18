@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom';
 import Header from './LoggedinHeader';
 import axios from 'axios';
 import APIconnection from '../APIconnection';
+import team1 from './team-images/team1.png';
+import team2 from './team-images/team2.png';
+import team3 from './team-images/team3.png';
 
 export default function TeamView(props) {
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
@@ -112,8 +115,8 @@ export default function TeamView(props) {
 
         }
     }
+    console.log("neekeri")
 
-    //Team page
     return (
     <div style={{textAlign: "center"}}>
 

@@ -9,13 +9,15 @@ import hockeylogo from '../hockeylogo.svg';
 
 
 export default class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: ["Mäntylä Mooses", "Kaukovainio Lions", "Rajakylä Rams", "Ruukki Hillbillies", "Kastelli Otters"]
-        };
-    }
-    componentDidMount() {
+    constructor(props)
+    {
+      super(props);
+      this.state = {
+        search: ["Mäntylä Moose", "Kaukovainio Lions","Rajakylä Rams", "Ruukki Hillbillies", "Kastelli Otters"]
+      };
+    }  
+    componentDidMount()
+    {
         axios.get(APIconnection.baseAddress + '/users')
             .then(res => {
                 this.setState({ search: res.data });
