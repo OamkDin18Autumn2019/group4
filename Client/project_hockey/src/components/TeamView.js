@@ -12,9 +12,11 @@ export default function TeamView(props) {
     const [OwnerId, setOwnerId] = useState([]);
     const [TeamMembers, setTeamMembers] = useState([]);
 
+    //When component mounts, sending POST calls to API where it fetches information about the team.
     useEffect(() => { 
         const id = parseInt(props.match.params.id);
 
+        //Getting team info with its id
         axios.get(APIconnection.baseAddress + `/teams/${id}`, {
         }).then(results => {
             if(results.data.length > 0){
@@ -32,6 +34,7 @@ export default function TeamView(props) {
                 if(Team.length === 1){
                     console.log(Team[0]);
 
+                    //Getting information about the team owner
                     axios.post(APIconnection.baseAddress + '/finduser', {
                         data: {
                             userid: Team[0].teamowner
@@ -41,6 +44,7 @@ export default function TeamView(props) {
                         setOwnerId(results.data.id);
                     });
 
+                    //Getting information about the members
                     axios.post(APIconnection.baseAddress + '/findmembers', {
                         data: {
                             teamid: Team[0].teamid
@@ -64,12 +68,6 @@ export default function TeamView(props) {
                         }
                     });
 
-                    if(Team[0].teamowner === ParsedUser.id){
-                        //manage;
-                    }
-                    else{
-
-                    }
                 }
                 else{
                     setTeam(Teams);
@@ -81,49 +79,41 @@ export default function TeamView(props) {
         });
     });
 
+    //If the user viewing the page isn't in a team, show "Join team" button to be able to join the team.
     function noteam(){
-        function jointeam(){
-            console.log(ParsedUser.id + "id")
-            console.log(parseInt(props.match.params.id) + "team")
-            axios.post(APIconnection.baseAddress + "/jointeam", {
-                data: {
-                    userid: ParsedUser.id,
-                    teamid: parseInt(props.match.params.id)
-                }
-            }).then(results => {
-                console.log(results);
-                console.log(results.data);
-            });
-
-            function update(value){
-                let prevData = JSON.parse(sessionStorage.getItem('User'));
-
-                Object.keys(value).forEach(function(val, key){
-                    prevData[val] = value[val];
-                })
-                sessionStorage.setItem('User', JSON.stringify(prevData));
-            }
-            update({teamid: parseInt(props.match.params.id)})
-        }
-
         if(ParsedUser.teamid === null || ParsedUser.teamid === ""){
+            function jointeam(){
+                console.log(ParsedUser.id + "id")
+                console.log(parseInt(props.match.params.id) + "team")
+                axios.post(APIconnection.baseAddress + "/jointeam", {
+                    data: {
+                        userid: ParsedUser.id,
+                        teamid: parseInt(props.match.params.id)
+                    }
+                }).then(results => {
+                    console.log(results);
+                    console.log(results.data);
+                });
+
+                //Updating the stored team value
+                function update(value){
+                    let prevData = JSON.parse(sessionStorage.getItem('User'));
+
+                    Object.keys(value).forEach(function(val, key){
+                        prevData[val] = value[val];
+                    })
+                    sessionStorage.setItem('User', JSON.stringify(prevData));
+                }
+                update({teamid: parseInt(props.match.params.id)})
+            }
             return(<button onClick={jointeam}>JOIN THIS TEAM</button>)
+        }
+        else{
+
         }
     }
 
-    /*function leaveteam(){
-        axios.post(APIconnection.baseAddress + '/leaveteam', {
-            data: {
-                userid: ParsedUser.id
-            }
-        }).then(results => {
-            sessionStorage.removeItem("Team");
-            window.location.reload();
-          
-        });
-  
-    }*/
-
+    //Team page
     return (
     <div style={{textAlign: "center"}}>
 

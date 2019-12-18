@@ -9,6 +9,7 @@ export default function UserView(props) {
     const [Role, setRole] = useState("");
     //const [Points, setPoints]
 
+    //When component mounts, sending POST calls to the API where it fetches information about the user and sets them to readable state. 
     useEffect(() => { 
         const id = parseInt(props.match.params.id);
 
@@ -71,6 +72,7 @@ export default function UserView(props) {
         });
     });
 
+    //User page
     return (
     <div style={{textAlign: "center"}}>
 

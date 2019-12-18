@@ -14,13 +14,13 @@ export default function Header(props) {
       event.preventDefault();
       props.setUserInfo("null");
 
-      //Sending a post request to the API with input username and password as payload
+      //Sending a post request to the API with input username and password as payload.
       axios.post(APIconnection.baseAddress + '/login', {
         data: {
             username: event.target['username'].value,
             password: event.target['password'].value
         }
-      }) //If the API approves the login, the client will store these values for later use
+      }) //If the API approves the login, the client will store these values for later use.
       .then(results => {
         props.loginSuccess();
         props.setUserInfo(results.data.id, results.data.username);
@@ -28,6 +28,7 @@ export default function Header(props) {
         sessionStorage.setItem('login', true);
         props.history.push(props.redirectPathOnSuccess);
 
+        //Checking if user is in a team and  if so, storing the team values.
         if(results.data.teamid === null){
 
         }
@@ -40,12 +41,10 @@ export default function Header(props) {
               sessionStorage.setItem('Team', JSON.stringify(results.data));
           });
         }
-
-        console.log(results.data.username);
       });
     }
 
-    //Testing if the user is already logged in and redirecting them back to the homepage
+    //Testing if the user is already logged in and redirecting them back to the homepage.
     function loggedin(){
       if(sessionStorage.getItem('login') === 'true'){
         props.loginSuccess();
@@ -55,6 +54,7 @@ export default function Header(props) {
       }
     }
 
+    //These functions are used to switch between the login and signup forms.
     function changeSignup(){
        document.getElementById("login-div").style.display = "none";
        document.getElementById("signup-div").style.display = "block" 
@@ -64,16 +64,7 @@ export default function Header(props) {
       document.getElementById("signup-div").style.display = "none" 
    }
 
-      /*Authenticator.authenticate(event.target['username'].value, event.target['password'].value)
-        .then(result =>
-          {
-            props.loginSuccess();
-            props.history.push(props.redirectPathOnSuccess);
-          })
-        .catch(() => {
-          props.loginFail();
-        });*/
-
+    //This is the first page.
     return (
         <div onLoad={loggedin()}>
             <div className="loginpage">
