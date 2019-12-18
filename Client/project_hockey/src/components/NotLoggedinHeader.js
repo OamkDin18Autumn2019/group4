@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './HeaderStyle.css';
 import './LoginStyle.css';
 import APIconnection from '../APIconnection.json';
 import axios from 'axios';
 import SignUpForm from './SignUpForm';
+import hockeylogo from '../hockeylogo.svg';
 
 
 export default function Header(props) {
 
 
-    function login(event)
-    {    
-      event.preventDefault();
-      props.setUserInfo("null");
+  function login(event) {
+    event.preventDefault();
+    props.setUserInfo("null");
 
       //Sending a post request to the API with input username and password as payload.
       axios.post(APIconnection.baseAddress + '/login', {
@@ -21,6 +21,7 @@ export default function Header(props) {
             password: event.target['password'].value
         }
       }) //If the API approves the login, the client will store these values for later use.
+
       .then(results => {
         props.loginSuccess();
         props.setUserInfo(results.data.id, results.data.username);
@@ -31,19 +32,19 @@ export default function Header(props) {
         //Checking if user is in a team and  if so, storing the team values.
         if(results.data.teamid === null){
 
+
         }
-        else{
+        else {
           axios.post(APIconnection.baseAddress + '/findteam', {
             data: {
-                teamid: results.data.teamid
+              teamid: results.data.teamid
             }
           }).then(results => {
-              sessionStorage.setItem('Team', JSON.stringify(results.data));
+            sessionStorage.setItem('Team', JSON.stringify(results.data));
           });
         }
       });
-    }
-
+  }
     //Testing if the user is already logged in and redirecting them back to the homepage.
     function loggedin(){
       if(sessionStorage.getItem('login') === 'true'){
@@ -53,39 +54,53 @@ export default function Header(props) {
         console.log(JSON.stringify(props.location))
       }
     }
+  }
 
-    //These functions are used to switch between the login and signup forms.
-    function changeSignup(){
-       document.getElementById("login-div").style.display = "none";
-       document.getElementById("signup-div").style.display = "block" 
-    }
-    function changeSignup2(){
-      document.getElementById("login-div").style.display = "block";
-      document.getElementById("signup-div").style.display = "none" 
-   }
+  function changeSignup() {
+    document.getElementById("login-div").style.display = "none";
+    document.getElementById("signup-div").style.display = "block"
+  }
+  function changeSignup2() {
+    document.getElementById("login-div").style.display = "block";
+    document.getElementById("signup-div").style.display = "none"
+  }
 
-    //This is the first page.
-    return (
-        <div onLoad={loggedin()}>
-            <div className="loginpage">
-                <h1>YETI Hockey</h1>
-                <div id="login-div" className="login-container">
-                    <form onSubmit={login}>
-                        <input type="text" placeholder="Username" name="username" />
-                        <br></br>
-                        <input type="password" placeholder="Password" name="password" />
-                        <br></br>
-                        <button type="submit">Login</button>
-                    </form>
-                    <button className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
-                </div>
-            </div>
-            <div id="signup-div">
-              <SignUpForm  setUserInfo = { props.setUserInfo } UserInfo={ props.UserInfo } loginSuccess={ props.loginSuccess } redirectPathOnSuccess={ props.redirectPathOnSuccess }/>
-              <button className="existing-button" type="submit" onClick={changeSignup2}>Already have an account?</button>
-            </div>
+  /*Authenticator.authenticate(event.target['username'].value, event.target['password'].value)
+    .then(result =>
+      {
+        props.loginSuccess();
+        props.history.push(props.redirectPathOnSuccess);
+      })
+    .catch(() => {
+      props.loginFail();
+    });*/
+
+  return (
+    <div onLoad={loggedin()}>
+      <div className="loginpage">
+        <div>
+          <div className="hockeylogo">
+            <img className="yetiLogo" src={hockeylogo} />
+          </div>
         </div>
-    )
+        <div id="login-div" className="login-container">
+          <form onSubmit={login}>
+            <input type="text" placeholder="Username" name="username" />
+            <br></br>
+            <input type="password" placeholder="Password" name="password" />
+            <br></br>
+            <button type="submit">Login</button>
+          </form>
+          <button className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
+
+        </div>
+      </div>
+      <div id="signup-div">
+        <SignUpForm setUserInfo={props.setUserInfo} UserInfo={props.UserInfo} loginSuccess={props.loginSuccess} redirectPathOnSuccess={props.redirectPathOnSuccess} />
+        <button className="existing-button" type="submit" onClick={changeSignup2}>Already have an account?</button>
+      </div>
+    </div>
+  )
 }
 
 

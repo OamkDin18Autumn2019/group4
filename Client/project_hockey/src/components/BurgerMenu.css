@@ -16,14 +16,14 @@ body
 a
 {
   text-decoration: none;
-  color: #232323;
+  color: rgb(20, 20, 20);
   
   transition: color 0.3s ease;
 }
 
 a:hover
 {
-  color: rgb(37, 105, 206);
+  color: #1d74b5;
 }
 
 #menuToggle
@@ -92,7 +92,7 @@ a:hover
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+  background: #1b1b1b;
 }
 
 /* Hide the middle */
@@ -122,7 +122,7 @@ a:hover
   right: -100px;
   
   
-  background: #ededed;
+  background: #ffffff;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* To stop flickering of text in safari */

@@ -37,10 +37,8 @@ export default class SearchBar extends Component {
                 elements[i].style.display = 'none';
             }
         }
-        else
-        {
-            for (var i=0;i<elements.length;i+=1)
-            {
+        else {
+            for (var i = 0; i < elements.length; i += 1) {
                 elements[i].style.display = 'flex';
             }
         }
@@ -50,20 +48,20 @@ export default class SearchBar extends Component {
         return (
             <div>
                 <div>
-                <form>
-                    <input className="searchbar" type="text" placeholder="Search" id="searchbar_id"
-                        onKeyUp={this.searchToggle} onKeyDown={this.searchToggle} onChange={this.filterResults} />
-                </form>
+                    <form>
+                        <input className="searchbar" type="text" placeholder="Search" id="searchbar_id"
+                            onKeyUp={this.searchToggle} onKeyDown={this.searchToggle} onChange={this.filterResults} />
+                    </form>
 
                     <div className="searchResults">
                         {
-                        this.state.searchResults.map((x,i)=> 
-                        <li className="searchresult" key={i}><Link to="MyMatches">{x}</Link></li>)
+                            this.state.searchResults.map((x, i) =>
+                                <li className="searchresult" key={i}><Link to="MyMatches">{x}</Link></li>)
                         }
                     </div>
                 </div>
 
-            </div>  
+            </div>
         )
     }
 }

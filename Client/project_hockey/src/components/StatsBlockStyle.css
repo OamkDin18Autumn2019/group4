@@ -2,3 +2,37 @@ ul
 {
     list-style-type: none;
 }
+
+
+.statsTeam {
+    background-color: rgb(255, 255, 255);
+    display: block;
+    margin: auto;
+    margin-left: 8%;
+    width: 28%;
+    height: 210px;
+    float: left;
+    text-align: center;
+}
+
+.topScores {
+    background-color: rgb(255, 255, 255);
+    display: block;
+    margin: auto;
+    width: 28%;
+    height: 210px;
+    float: left;
+    text-align: center;
+    border-left: 1.4px solid rgb(247, 247, 247);
+    border-right: 1.4px solid rgb(247, 247, 247);
+}
+
+.teamInfo {
+    background-color: rgb(255, 255, 255);
+    display: block;
+    margin: auto;
+    width: 28%;
+    height: 210px;
+    float: left;  
+    text-align: center;  
+}

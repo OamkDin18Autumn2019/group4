@@ -45,6 +45,37 @@
   .headerbody .login-container button:hover {
     background: #ccc;
   }
+
+  input {
+    width: 250px;
+    height: 40px;
+    border: none;
+    margin-bottom: 3px;
+    display: inline-block;
+}
+
+  button {
+    width: 100px;
+    height: 50px;
+    background-color: #1d74b5;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    color:#fff;
+    font-size: 15px;
+  }
+
+  button:hover,
+  button:focus {
+    background: #41c0f3;
+}
+
+button.register-button {
+  background-color: #1d74b5;
+  color:#fff;
+  font-size: 15px;
+}
+
   
   /* On small screens, display the login vertically instead of horizontally */
   @media screen and (max-width: 600px) {
@@ -79,3 +110,10 @@
     cursor: pointer;
     outline: inherit;
   }
+
+  input {
+    width: 250px;
+    height: 40px;
+    border: none;
+    display: inline-block;
+}
