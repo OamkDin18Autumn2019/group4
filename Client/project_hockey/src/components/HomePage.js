@@ -11,8 +11,6 @@ export default function HomePage(props) {
     <div style={{textAlign: "center"}}>
       <Header/>
 
-      <h1>Hello {ParsedUser.username}!</h1>
-
       <MainWindow />
 
     </div>

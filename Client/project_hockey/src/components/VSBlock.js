@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import "./VSBlockStyle.css"
 import APIconnection from '../APIconnection.json';
 import axios from 'axios';
+import team1 from './team-images/team1.png';
+import team2 from './team-images/team2.png';
 
 
 export default class VSBlock extends Component  {
@@ -9,7 +11,8 @@ export default class VSBlock extends Component  {
   {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      matches: []
     };
   }
   componentDidMount()
@@ -19,9 +22,24 @@ export default class VSBlock extends Component  {
           {
               this.setState({ users: res.data});
           })
+      axios.get(APIconnection.baseAddress + '/allmatches')
+      .then(res=>
+        {
+            this.setState({ matches: res.data});
+        }
+        )
   }
+  
   render(){  
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
+    let ParsedTeam = JSON.parse(sessionStorage.getItem("Team"));
+    var testi = ParsedUser.teamid;
+    var mappedmatches = this.state.matches.map(x=> x.matchdate)
+    var latestmatch = String(mappedmatches[0])
+    var date = latestmatch.slice(0,10)
+
+    console.log(date)
+
     return (
       <div className="VSBlock">
         <div>
@@ -31,10 +49,10 @@ export default class VSBlock extends Component  {
           <img alt="ayeelmao" className="VSBlock_hometeamimg"></img>
         </div>
         <div>
-          <img alt="ayeelmao" className="VSBlock_awayteamimg"></img>
+          <img alt="ayeelmao2" className="VSBlock_awayteamimg"></img>
         </div>
         <div>
-          <p>date here</p>
+          <p>{date}</p>
         </div>
       </div>
     )}

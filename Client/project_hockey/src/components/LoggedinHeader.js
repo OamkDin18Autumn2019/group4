@@ -12,7 +12,7 @@ export default class Header extends Component {
     {
       super(props);
       this.state = {
-        search: []
+        search: ["Mäntylä Mooses", "Kaukovainio Lions","Rajakylä Rams", "Ruukki Hillbillies", "Kastelli Otters"]
       };
     }  
     componentDidMount()
@@ -34,16 +34,12 @@ export default class Header extends Component {
     }
 
     render(){
-        const aye = this.state.search.map(x=> x.username)
-        const placeholder = this.state.searchyay
-        const test = ["Mäntylä Mooses", "Kaukovainio Lions","Mäntylä Mooses", "Kaukovainio Lions","Mäntylä Mooses", "Kaukovainio Lions"]
-        console.log(placeholder)
         return (
         <div>
             <div>Hello Hockey World</div>
             <div className="headerbody">
 
-            <Search content={test}/> 
+            <Search content={this.state.search}/> 
             
 
                 <div className="login-container">

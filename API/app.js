@@ -170,6 +170,12 @@ app.post('/finduser',(req, res) => {
   })
 });
 
+app.get('/usergoals', (req, res) => {
+  db.query('SELECT id, username, teamid, goals FROM NHLusers ORDER BY goals DESC').then(results => {
+    res.json(results);
+  })
+});
+
  //----------------------------------------------------------------------TEAMS---------------------------------------------------------------------------------//
 
  app.post('/teams', (req, res) => {
@@ -278,6 +284,12 @@ app.post('/getmatches',(req, res) => {
   db.query('SELECT matchid, team1, team2, matchdate, goals1, goals2, scorers, assists FROM NHLmatches WHERE team1 = ? OR team2 =?', [teamid,teamid]).then(results => {
     res.json(results);
     console.log(results);
+  })
+});
+
+app.get('/allmatches', (req, res) => {
+  db.query('SELECT matchid, team1, team2, matchdate, goals1, goals2, scorers, assists FROM NHLmatches').then(results => {
+    res.json(results);
   })
 });
 
