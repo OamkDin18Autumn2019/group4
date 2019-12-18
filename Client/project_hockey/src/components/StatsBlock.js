@@ -45,7 +45,7 @@ export default class StatsBlock extends Component  {
           </ul>
         </div>
         <div>
-          <h2> TOP scorers</h2>
+          <h2>TOP scorers</h2>
           <ul>
               {players}
           </ul>

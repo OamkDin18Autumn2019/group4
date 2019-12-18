@@ -12,7 +12,7 @@ export default class Header extends Component {
     {
       super(props);
       this.state = {
-        search: ["Mäntylä Mooses", "Kaukovainio Lions","Rajakylä Rams", "Ruukki Hillbillies", "Kastelli Otters"]
+        search: ["Mäntylä Moose", "Kaukovainio Lions","Rajakylä Rams", "Ruukki Hillbillies", "Kastelli Otters"]
       };
     }  
     componentDidMount()
