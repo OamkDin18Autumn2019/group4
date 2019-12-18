@@ -27,8 +27,6 @@ export default function BurgerMenu() {
                     <span></span>
 
                     <ul id="menu">
-                        <a href="#"><li>Option 1</li></a>
-                        <a href="#"><li>Option 2</li></a>
                         <li><Link to={ `/users/${ParsedUser.id}` }>My Profile</Link></li>
                         <li><Link to="../MyMatches">My Matches</Link></li>
                         {userteam()}
