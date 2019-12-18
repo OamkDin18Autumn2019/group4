@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import './App.css';
 import Header from './components/NotLoggedinHeader';
-import LoginAfterSignup from './components/LoginAfterSignup';
 import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
-import MainWindow from './components/MainWindow';
 import MyTeam from './components/MyTeam';
 import ManageTeam from './components/ManageTeam';
 import MyMatches from './components/MyMatches';
@@ -62,20 +60,6 @@ export default class App extends Component {
           (routeProps) =>
           
             <Header
-              loginSuccess = { this.onLogin }
-              loginFail = { this.onLoginFail }
-              setUserInfo = { this.setUserInfo }
-              location = {this.state.location}
-              redirectPathOnSuccess="/HomePage"
-              {...routeProps}
-            />
-          } 
-        />
-
-        <Route path="/LoginAfterSignup" exact render={
-          (routeProps) =>
-          
-            <LoginAfterSignup
               loginSuccess = { this.onLogin }
               loginFail = { this.onLoginFail }
               setUserInfo = { this.setUserInfo }

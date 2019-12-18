@@ -14,7 +14,7 @@ export default class StatsBlock extends Component  {
   }
   componentDidMount()
   {
-      axios.get(APIconnection.baseAddress + '/users')
+      axios.get(APIconnection.baseAddress + '/usergoals')
       .then(res =>
           {
               this.setState({ users: res.data});
@@ -26,11 +26,8 @@ export default class StatsBlock extends Component  {
           })
   }
   render(){ 
-    let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
-    let ParsedTeam = JSON.parse(sessionStorage.getItem("Team"));
     var mappedplayers = this.state.users.map(x => x)
-    var filterplayers = mappedplayers.filter(function(filterplayer){return filterplayer.teamid == ParsedUser.teamid})
-    var limitplayers = filterplayers.slice(0,5)
+    var limitplayers = mappedplayers.slice(0,5)
     var players = limitplayers.sort((a, b) => b.goals - a.goals).map
                           ((result, i) => 
                           <li key={i}>{result.username} {result.goals}</li>);
@@ -47,7 +44,7 @@ export default class StatsBlock extends Component  {
           </ul>
         </div>
         <div>
-          <h2>{"hei"} TOP scorers</h2>
+          <h2> TOP scorers</h2>
           <ul>
               {players}
           </ul>
