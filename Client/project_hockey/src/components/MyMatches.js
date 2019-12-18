@@ -9,6 +9,7 @@ export default function MyMatches(props) {
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
     const [MyMatches, setMyMatches] = useState([]);
 
+    //When component mounts, send POST calls to API where it fetches all the matches set for users team
     useEffect(() => { 
       axios.post(APIconnection.baseAddress + '/getmatches', {
         data: {
@@ -46,6 +47,7 @@ export default function MyMatches(props) {
       });
     });
 
+  //Matches page
   return (
     <div style={{textAlign: "center"}}>
 

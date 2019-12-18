@@ -1,10 +1,10 @@
+body {
+    background-color: #e9eef4 !important;
+}
 
 .headerbody {
     width: 100%;
-    height: 70px;
-    background-color: blue;
-    color: red;    
-
+    height: 70px;  
 }
 
 .loginpage
@@ -12,4 +12,15 @@
     width: 100%;
     color: red; 
     text-align: center;  
+}
+
+.hockeylogo {
+    width: 150px;
+    height: 70px;
+    margin-left: 7%;
+}
+
+.yetiLogo {
+    width: 160px;
+    height: 160px;
 }

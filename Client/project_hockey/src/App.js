@@ -4,7 +4,6 @@ import './App.css';
 import Header from './components/NotLoggedinHeader';
 import HomePage from './components/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
-import MyTeam from './components/MyTeam';
 import ManageTeam from './components/ManageTeam';
 import MyMatches from './components/MyMatches';
 import UserView from './components/UserView';
@@ -123,17 +122,6 @@ export default class App extends Component {
                 UserInfo={ this.state.UserInfo }
               />
             </div>
-          }></ProtectedRoute>
-
-        <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/MyTeam" exact render={
-            (routeProps) =>
-            <div>
-
-              <MyTeam
-                UserInfo={ this.state.UserInfo }
-              /> 
-            </div>
-            
           }></ProtectedRoute>
 
           <ProtectedRoute isAuthenticated={this.state.isAuthenticated}  path="/MyMatches" exact render={

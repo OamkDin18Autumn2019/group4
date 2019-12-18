@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import "./VSBlockStyle.css"
 import APIconnection from '../APIconnection.json';
 import axios from 'axios';
@@ -7,35 +7,31 @@ import team2 from './team-images/team2.png';
 import team3 from './team-images/team3.png';
 
 
-export default class VSBlock extends Component  {
-  constructor(props)
-  {
+export default class VSBlock extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       users: [],
       matches: []
     };
   }
-  componentDidMount()
-  {
-      axios.get(APIconnection.baseAddress + '/users')
-      .then(res =>
-          {
-              this.setState({ users: res.data});
-          })
-      axios.get(APIconnection.baseAddress + '/allmatches')
-      .then(res=>
-        {
-            this.setState({ matches: res.data});
-        }
-        )
+  componentDidMount() {
+    axios.get(APIconnection.baseAddress + '/users')
+      .then(res => {
+        this.setState({ users: res.data });
+      })
+    axios.get(APIconnection.baseAddress + '/allmatches')
+      .then(res => {
+        this.setState({ matches: res.data });
+      }
+      )
   }
-  
-  render(){  
+
+  render() {
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
     let ParsedTeam = JSON.parse(sessionStorage.getItem("Team"));
     var testi = ParsedUser.teamid;
-    var mappedmatches = this.state.matches.map(x=> x.matchdate)
+    var mappedmatches = this.state.matches.map(x => x.matchdate)
     var latestmatch = String(mappedmatches[0])
     var date = latestmatch.slice(0,10)
     var hometeammap = this.state.matches.map(x=> x.team1)
@@ -58,7 +54,7 @@ export default class VSBlock extends Component  {
 
     return (
       <div className="VSBlock">
-        <div>
+        <div className="vsbox">
           <h1>Next game</h1>
         </div>
         <div>
@@ -71,5 +67,6 @@ export default class VSBlock extends Component  {
           <p>{date}</p>
         </div>
       </div>
-    )}
+    )
+  }
 }
