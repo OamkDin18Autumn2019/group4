@@ -44,3 +44,45 @@ body {
     z-index: -1;
 }
 
+.hockeylogo2 {
+    width: 100%;
+    height: 345px;
+    
+}
+.yetiLogo2 {
+    width: 400px;
+    height: 400px;
+}
+.signup_div
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+}
+.signup_div button
+{
+    margin-top: 5px;
+}
+.exist_div
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    width: 100%;
+}
+.exist_div button
+{
+    width: 15%;
+}
+.exist_div button:hover
+{
+    background: none;
+}
+.loginman
+{
+    background-color: #1d74b5;
+    text-align: center;
+}
+
+
+

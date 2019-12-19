@@ -4,6 +4,7 @@ import APIconnection from '../APIconnection.json';
 import axios from 'axios';
 import team1 from './team-images/team1.png';
 import team2 from './team-images/team2.png';
+import team3 from './team-images/team3.png';
 
 
 export default class VSBlock extends Component {
@@ -32,26 +33,40 @@ export default class VSBlock extends Component {
     var testi = ParsedUser.teamid;
     var mappedmatches = this.state.matches.map(x => x.matchdate)
     var latestmatch = String(mappedmatches[0])
-    var date = latestmatch.slice(0, 10)
+    var date = latestmatch.slice(0,10)
+    var hometeammap = this.state.matches.map(x=> x.team1)
+    var awayteammap = this.state.matches.map(x=>x.team2)
+    var hometeamslice = hometeammap[0]
+    var awayteamslice = awayteammap[0]
+    var team1image = null
+    var team2image = null
 
-    console.log(date)
+    if (hometeamslice === "1")
+    {
+      team1image = team1;
+    }
+    if (awayteamslice === "2")
+    {
+      team2image = team2;
+    }
+
+    console.log(hometeamslice)
 
     return (
       <div className="VSBlock">
         <div className="vsbox">
+          <h1>Next game</h1>
           <div>
-            <h1>Next game</h1>
-          </div>
-          <div>
-            <img alt="ayeelmao" className="VSBlock_hometeamimg"></img>
-          </div>
-          <div>
-            <img alt="ayeelmao2" className="VSBlock_awayteamimg"></img>
-          </div>
-          <div>
-            <p>{date}</p>
-          </div>
+          <img alt="ayeelmao" src={team1image} className="VSBlock_hometeamimg"></img>
         </div>
+        <div>
+          <img alt="ayeelmao2" src={team2image} className="VSBlock_awayteamimg"></img>
+        </div>
+        <div>
+          <p>{date}</p>
+        </div>
+        </div>
+
       </div>
     )
   }

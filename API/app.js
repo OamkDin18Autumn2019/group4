@@ -220,7 +220,8 @@ app.post('/findteam',(req, res) => {
 app.post('/jointeam',(req, res) => {
   let teamid = req.body.data.teamid
   let userid = req.body.data.userid
-  db.query('UPDATE NHLusers SET teamid = (?,?) WHERE id = ?', [teamid, userid]).then(dbResults => {
+  console.log(teamid)
+  db.query('UPDATE NHLusers SET teamid = ? WHERE id = ?', [teamid, userid]).then(dbResults => {
     console.log(dbResults);
     res.sendStatus(201);
   })

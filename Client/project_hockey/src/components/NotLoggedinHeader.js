@@ -15,13 +15,14 @@ export default function Header(props) {
     event.preventDefault();
     props.setUserInfo("null");
 
-    //Sending a post request to the API with input username and password as payload
-    axios.post(APIconnection.baseAddress + '/login', {
-      data: {
-        username: event.target['username'].value,
-        password: event.target['password'].value
-      }
-    }) //If the API approves the login, the client will store these values for later use
+      //Sending a post request to the API with input username and password as payload.
+      axios.post(APIconnection.baseAddress + '/login', {
+        data: {
+            username: event.target['username'].value,
+            password: event.target['password'].value
+        }
+      }) //If the API approves the login, the client will store these values for later use.
+
       .then(results => {
         props.loginSuccess();
         props.setUserInfo(results.data.id, results.data.username);
@@ -29,7 +30,9 @@ export default function Header(props) {
         sessionStorage.setItem('login', true);
         props.history.push(props.redirectPathOnSuccess);
 
-        if (results.data.teamid === null) {
+        //Checking if user is in a team and  if so, storing the team values.
+        if(results.data.teamid === null){
+
 
         }
         else {
@@ -41,20 +44,17 @@ export default function Header(props) {
             sessionStorage.setItem('Team', JSON.stringify(results.data));
           });
         }
-
-        console.log(results.data.username);
       });
   }
-
-  //Testing if the user is already logged in and redirecting them back to the homepage
-  function loggedin() {
-    if (sessionStorage.getItem('login') === 'true') {
-      props.loginSuccess();
-      props.setUserInfo(sessionStorage.getItem("id"), sessionStorage.getItem("username"));
-      props.history.push(props.redirectPathOnSuccess);
-      console.log(JSON.stringify(props.location))
+    //Testing if the user is already logged in and redirecting them back to the homepage.
+    function loggedin(){
+      if(sessionStorage.getItem('login') === 'true'){
+        props.loginSuccess();
+        props.setUserInfo(sessionStorage.getItem("id"), sessionStorage.getItem("username"));
+        props.history.push(props.redirectPathOnSuccess);
+        console.log(JSON.stringify(props.location))
+      }
     }
-  }
 
   function changeSignup() {
     document.getElementById("login-div").style.display = "none";
@@ -79,24 +79,30 @@ export default function Header(props) {
     <div onLoad={loggedin()}>
       <div className="loginpage">
         <div>
-          <div className="hockeylogo">
-            <img className="yetiLogo" src={hockeylogo} />
+          <div className="hockeylogo2">
+            <img className="yetiLogo2" src={hockeylogo} />
           </div>
         </div>
         <div id="login-div" className="login-container">
           <form onSubmit={login}>
-            <input type="text" placeholder="Username" name="username" />
+            <input className="loginman" type="text" placeholder="Username" name="username" />
             <br></br>
-            <input type="password" placeholder="Password" name="password" />
+            <input className="loginman" type="password" placeholder="Password" name="password" />
             <br></br>
-            <button type="submit">Login</button>
+            <button style={{backgroundColor:"#2c2825"}} type="submit">Login</button>
           </form>
-          <button className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
+          <div className="signup_div">
+          <button style={{backgroundColor:"#2c2825"}} className="register-button" type="submit" onClick={changeSignup}>Sign up</button>
+          </div>
+
         </div>
       </div>
       <div id="signup-div">
         <SignUpForm setUserInfo={props.setUserInfo} UserInfo={props.UserInfo} loginSuccess={props.loginSuccess} redirectPathOnSuccess={props.redirectPathOnSuccess} />
+        <div className="exist_div">
         <button className="existing-button" type="submit" onClick={changeSignup2}>Already have an account?</button>
+        </div>
+        
       </div>
       <div>
         <div className="hockeybackground">
@@ -105,7 +111,8 @@ export default function Header(props) {
       </div>
     </div>
   )
-}
+  }
+
 
 
 

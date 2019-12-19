@@ -9,7 +9,6 @@ class MainWindow extends React.Component {
       { 
         return (
           <div>
-            <h1>Man window man </h1>
             <div>
               <VSBlock />
             </div>

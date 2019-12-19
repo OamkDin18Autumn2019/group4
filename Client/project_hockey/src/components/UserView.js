@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Header from './LoggedinHeader';
-import BurgerMenu from './BurgerMenu';
 import axios from 'axios';
 import APIconnection from '../APIconnection';
 
@@ -10,6 +9,7 @@ export default function UserView(props) {
     const [Role, setRole] = useState("");
     //const [Points, setPoints]
 
+    //When component mounts, sending POST calls to the API where it fetches information about the user and sets them to readable state. 
     useEffect(() => { 
         const id = parseInt(props.match.params.id);
 
@@ -72,6 +72,7 @@ export default function UserView(props) {
         });
     });
 
+    //User page
     return (
     <div style={{textAlign: "center"}}>
 
@@ -80,22 +81,18 @@ export default function UserView(props) {
         <div style={{ color: "black" }}>
 
             <div>
-                <button onClick={() => props.history.goBack()}>Back</button>
                 <div>
-                    <div>
-                        
-                        {User.map(user => <h1>{user.username}</h1>)} 
-                        <h2>{ Handedness } { Role }</h2>
-                        <h3>Stats</h3>
-                        {User.map(user => <p>{user.goals} goals and {user.assists} assists</p>)}  
+                    
+                    {User.map(user => <h1>{user.username}</h1>)} 
+                    <h2>{ Handedness } { Role }</h2>
+                    <h3>Stats</h3>
+                    {User.map(user => <p>{user.goals} goals and {user.assists} assists</p>)}  
 
-                    <div>
-                </div>
+                <div>
             </div>
         </div>
         </div>
         </div>
-        <BurgerMenu />
     </div>
   )
 }

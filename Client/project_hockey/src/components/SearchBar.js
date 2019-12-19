@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import "./SearchBarStyle.css";
+import axios from 'axios';
+import APIconnection from '../APIconnection.json';
 
 export default class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
             searchText: [],
-            searchResults: []
+            searchResults: [],
+            teams: 0
         };
     }
-
 
     filterResults = (event) => {
         var searchResults = this.state.searchText;
@@ -44,7 +46,20 @@ export default class SearchBar extends Component {
         }
     }
 
+    checkresult()
+    {
+        var results = document.getElementsByClassName("checkresults").innerHTML;
+        var checkteam1 = 'Mäntylä Moose'
+
+        if (results===checkteam1)
+        {
+            console.log("yes")
+        }
+        
+    }
     render() {
+        
+        
         return (
             <div>
                 <div>
@@ -55,8 +70,9 @@ export default class SearchBar extends Component {
 
                     <div className="searchResults">
                         {
-                            this.state.searchResults.map((x, i) =>
-                                <li className="searchresult" key={i}><Link to="MyMatches">{x}</Link></li>)
+                        this.state.searchResults.map((x,i)=> 
+                        <li className="searchresult" key={i}><Link className="checkresults" onClick={this.checkresult} to={ `/teams/1`}>{x}</Link></li>)
+
                         }
                     </div>
                 </div>
