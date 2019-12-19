@@ -86,16 +86,12 @@ export default function TeamView(props) {
     function noteam(){
         if(ParsedUser.teamid === null || ParsedUser.teamid === ""){
             function jointeam(){
-                console.log(ParsedUser.id + "id")
-                console.log(parseInt(props.match.params.id) + "team")
                 axios.post(APIconnection.baseAddress + "/jointeam", {
                     data: {
                         userid: ParsedUser.id,
                         teamid: parseInt(props.match.params.id)
                     }
                 }).then(results => {
-                    console.log(results);
-                    console.log(results.data);
                 });
 
                 //Updating the stored team value
@@ -115,7 +111,6 @@ export default function TeamView(props) {
 
         }
     }
-    console.log("neekeri")
 
     return (
     <div style={{textAlign: "center"}}>

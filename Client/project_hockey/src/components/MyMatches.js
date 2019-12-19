@@ -7,7 +7,9 @@ import APIconnection from '../APIconnection';
 export default function MyMatches(props) {
 
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
+    const [Team, setTeam] = useState([]);
     const [MyMatches, setMyMatches] = useState([]);
+    const [MyPastMatches, setMyPastMatches] = useState([]);
 
     //When component mounts, send POST calls to API where it fetches all the matches set for users team
     useEffect(() => { 
@@ -27,25 +29,59 @@ export default function MyMatches(props) {
                   goals2: info.goals2,
                   scorers: info.scorers,
                   assists: info.assists,
+                  teamname1: info.teamname1,
+                  teamname2: info.teamname2
               }
               return Match_Info;
             });
-            
-            console.log(Matches);
   
             if(MyMatches.length == 0){
               setMyMatches(Matches);
-              console.log(MyMatches);
             }
             else{
-              
+              //Nothing
             }
           }
           else{
+            //Nothing
+          }
+      });
 
+      axios.post(APIconnection.baseAddress + '/getpastmatches', {
+        data: {
+            teamid: ParsedUser.teamid
+        }
+        }).then(results => {
+          if(results.data.length > 0){
+            let PastMatches = results.data.map((info) => {
+              const Match_Info = {
+                  matchid: info.matchid,
+                  team1: info.team1,
+                  team2: info.team2,
+                  matchdate: info.matchdate,
+                  goals1: info.goals1,
+                  goals2: info.goals2,
+                  scorers: info.scorers,
+                  assists: info.assists,
+                  teamname1: info.teamname1,
+                  teamname2: info.teamname2
+              }
+              return Match_Info;
+            });
+  
+            if(MyPastMatches.length == 0){
+              setMyPastMatches(PastMatches);
+            }
+            else{
+              //Nothing
+            }
+          }
+          else{
+            //Nothing
           }
       });
     });
+
 
   //Matches page
   return (
@@ -53,21 +89,23 @@ export default function MyMatches(props) {
 
             <Header/>
 
-      <div className="playedmatches">
+      <div className="upcomingmatches">
+        <h2>Your upcoming matches</h2> 
         {MyMatches.map((match, i, x) =>
-          <div > 
-          <Link key={i} to={ `/teams/${match.team1}` }>{match.team1}</Link> vs <Link key={x} to={ `/teams/${match.team2}` }>{match.team2}</Link> on {match.matchdate.slice(0,10)}
+          <div>
+            <Link key={i} to={ `/teams/${match.team1}` }>{match.teamname1}</Link> vs <Link key={x} to={ `/teams/${match.team2}` }>{match.teamname2}</Link> on {match.matchdate.slice(0,10)}
           </div>
           )}
       </div>  
 
-      <div className="upcomingmatches">
-      {MyMatches.map((match, i, x) =>
-        <div > 
-        <Link key={i} to={ `/teams/${match.team1}` }>{match.team1}</Link> vs <Link key={x} to={ `/teams/${match.team2}` }>{match.team2}</Link> on {match.matchdate.slice(0,10)}
-        </div>
-        )}
-    </div>  
+      <div className="playedmatches">
+        <h2>Your past matches</h2>
+        {MyPastMatches.map((match, i, x) =>
+          <div > 
+            <Link key={i} to={ `/teams/${match.team1}` }>{match.teamname1}</Link> vs <Link key={x} to={ `/teams/${match.team2}` }>{match.teamname2}</Link> on {match.matchdate.slice(0,10)} ({match.goals1}-{match.goals2})
+          </div>
+          )}
+      </div>  
     
     </div>
   )
