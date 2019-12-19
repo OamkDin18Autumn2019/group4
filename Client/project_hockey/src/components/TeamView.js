@@ -6,6 +6,8 @@ import APIconnection from '../APIconnection';
 import team1 from './team-images/team1.png';
 import team2 from './team-images/team2.png';
 import team3 from './team-images/team3.png';
+import team4 from './team-images/team4.png';
+import team5 from './team-images/team5.png';
 
 export default function TeamView(props) {
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
