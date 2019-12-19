@@ -288,7 +288,15 @@ app.get('/leagues/:leagueid',(req, res) => {
 
 app.post('/getmatches',(req, res) => {
   let teamid = req.body.data.teamid
-  db.query('SELECT matchid, team1, team2, matchdate, goals1, goals2, scorers, assists FROM NHLmatches WHERE team1 = ? OR team2 =?', [teamid,teamid]).then(results => {
+  db.query('SELECT matchid, team1, team2, matchdate, goals1, goals2, scorers, assists, teamname1, teamname2 FROM NHLmatches WHERE team1 = ? OR team2 = ? ORDER BY matchdate ASC', [teamid,teamid]).then(results => {
+    res.json(results);
+    console.log(results);
+  })
+});
+
+app.post('/getpastmatches',(req, res) => {
+  let teamid = req.body.data.teamid
+  db.query('SELECT matchid, team1, team2, matchdate, goals1, goals2, scorers, assists, teamname1, teamname2 FROM NHLpastmatches WHERE team1 = ? OR team2 = ? ORDER BY matchdate DESC', [teamid,teamid]).then(results => {
     res.json(results);
     console.log(results);
   })
