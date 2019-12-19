@@ -176,6 +176,12 @@ app.get('/usergoals', (req, res) => {
   })
 });
 
+app.get('/userassists', (req, res) => {
+  db.query('SELECT id, username, teamid, assists FROM NHLusers ORDER BY assists DESC').then(results => {
+    res.json(results);
+  })
+});
+
  //----------------------------------------------------------------------TEAMS---------------------------------------------------------------------------------//
 
  app.post('/teams', (req, res) => {

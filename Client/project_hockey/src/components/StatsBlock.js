@@ -9,6 +9,7 @@ export default class StatsBlock extends Component {
     super(props);
     this.state = {
       users: [],
+      usersA: [],
       teams: []
     };
   }
@@ -17,6 +18,10 @@ export default class StatsBlock extends Component {
       .then(res => {
         this.setState({ users: res.data });
       })
+    axios.get(APIconnection.baseAddress + '/userassists')
+    .then(res => {
+      this.setState({ usersA: res.data });
+    })
     axios.get(APIconnection.baseAddress + '/teams')
       .then(res => {
         this.setState({ teams: res.data });
@@ -24,39 +29,40 @@ export default class StatsBlock extends Component {
   }
   render() {
     var mappedplayers = this.state.users.map(x => x)
+    var mappedplayersA = this.state.usersA.map(x => x)
     var limitplayers = mappedplayers.slice(0, 5)
-    var players = limitplayers.sort((a, b) => b.goals - a.goals).map
+    var limitplayersA = mappedplayersA.slice(0, 5)
+    var goals = limitplayers.sort((a, b) => b.goals - a.goals).map
                           ((result, i) => 
                           <li key={i}><Link to={ `/users/${result.id}` }>{result.username}, {result.goals} goals</Link></li>);
     var mappedteams = this.state.teams.map(x => x)
     var teams = mappedteams.sort((a, b) => b.teamwins - a.teamwins).map
                           ((result, i) => 
                           <li key={i}><Link to={ `/teams/${result.teamid}` }>{result.teamname}, {result.teamwins} wins</Link></li>);
+    var assists = limitplayersA.sort((a, b) => b.assists - a.assists).map
+                          ((result, i) => 
+                          <li key={i}><Link to={ `/users/${result.id}` }>{result.username}, {result.assists} assists</Link></li>);
     return (
       <div className="StatsBlock">
 
         <div className="statsTeam">
-          <h2>Team Stats</h2>
+          <h2>TOP TEAMS</h2>
           <ul>
             {teams}
           </ul>
         </div>
 
         <div className="topScores">
-          <h2> TOP scorers</h2>
+          <h2>TOP SCORERS</h2>
           <ul>
-            {players}
+            {goals}
           </ul>
         </div>
 
         <div className="teamInfo">
-          <h2>LMAO what here</h2>
+          <h2>TOP WINGMANS</h2>
           <ul>
-            <li>lorem ipsum</li>
-            <li>lorem ipsum</li>
-            <li>lorem ipsum</li>
-            <li>lorem ipsum</li>
-            <li>lorem ipsum</li>
+            {assists}
           </ul>
         </div>
 
