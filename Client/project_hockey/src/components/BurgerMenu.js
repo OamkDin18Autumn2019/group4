@@ -8,10 +8,10 @@ export default function BurgerMenu() {
 
     function userteam(){
         if(ParsedUser.teamid === null || ParsedUser.teamid === ""){
-            return (<li><Link to="/NoTeam" >My Team</Link></li>)
+            return (<li><Link to="/NoTeam" >Team</Link></li>)
         }
         else{
-            return (<li><Link to={ `/teams/${ParsedUser.teamid}` }>My Team</Link></li>)
+            return (<li><Link to={ `/teams/${ParsedUser.teamid}` }>Team</Link></li>)
         }
     }
     function logout()
@@ -32,8 +32,8 @@ export default function BurgerMenu() {
                     <span></span>
 
                     <ul id="menu">
-                        <li><Link to={ `/users/${ParsedUser.id}` }>My Profile</Link></li>
-                        <li><Link to="../MyMatches">My Matches</Link></li>
+                        <li><Link to={ `/users/${ParsedUser.id}` }>Profile</Link></li>
+                        <li><Link to="../MyMatches">Matches</Link></li>
                         {userteam()}
                         <li onClick={logout}><Link style={{color:"red"}}>Logout</Link></li>
                     </ul>
