@@ -71,6 +71,8 @@
 }
 
 button.register-button {
+  width: 100px;
+  height: 50px;
   background-color: #1d74b5;
   color:#fff;
   font-size: 15px;

@@ -5,6 +5,7 @@ import APIconnection from '../APIconnection.json';
 import axios from 'axios';
 import SignUpForm from './SignUpForm';
 import hockeylogo from '../hockeylogo.svg';
+import hockeybg from '../hockeybg.svg';
 
 
 export default function Header(props) {
@@ -96,6 +97,11 @@ export default function Header(props) {
       <div id="signup-div">
         <SignUpForm setUserInfo={props.setUserInfo} UserInfo={props.UserInfo} loginSuccess={props.loginSuccess} redirectPathOnSuccess={props.redirectPathOnSuccess} />
         <button className="existing-button" type="submit" onClick={changeSignup2}>Already have an account?</button>
+      </div>
+      <div>
+        <div className="hockeybackground">
+          <img className="hockeybg" src={hockeybg} />
+        </div>
       </div>
     </div>
   )

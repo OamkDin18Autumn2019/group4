@@ -24,3 +24,23 @@ body {
     width: 160px;
     height: 160px;
 }
+
+.hockeybackground {
+    min-height: 100%;
+    min-width: 1024px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.hockeybg {
+    min-height: 100%;
+    min-width: 1024px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 50%;
+    z-index: -1;
+}
+
