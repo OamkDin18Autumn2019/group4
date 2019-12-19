@@ -17,7 +17,7 @@ a
 {
   text-decoration: none;
   color: rgb(20, 20, 20);
-  
+  letter-spacing: 0.1px;
   transition: color 0.3s ease;
 }
 

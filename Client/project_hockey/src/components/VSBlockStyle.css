@@ -14,8 +14,75 @@
     height: 305px;
     margin-left: 8%;
     margin-right: 8%;
+    margin-bottom: 15px;
     background-image: linear-gradient(to right, #41c0f3 , #1d74b5); 
     -webkit-box-shadow: 3px 7px 10px 4px #41c1f363;
     -moz-box-shadow: 3px 7px 10px 4px #41c1f363;
     box-shadow: 3px 7px 10px 4px #41c1f363;
+}
+
+.VSBlock_hometeamimg {
+    float: left;
+    width: 260px;
+    height: 220px;
+    margin-left: 200px;
+    margin-right: 170px;
+    top: 0;
+}
+
+.VSBlock_awayteamimg {
+    float: right;
+    width: 260px;
+    height: 220px;
+    margin-right: 200px; 
+    top: 0;
+}
+
+.gametime {
+    margin: 0;
+    width: 140px;
+    height: 10px;
+    justify-content: center;
+    float: left;
+    text-align: center;
+}
+
+.playtime {
+    width: 100px;
+    float: right;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 0.1px;
+}
+
+.gametitle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    color: #1d74b5;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: 0.1px;
+    width: 200px;
+}
+
+.teamline {
+    display: block;
+    margin-left: auto;
+    margin-right: 49.5%;
+    width: 61px;
+    height: 80px;
+    margin-top: 60px;
+}
+
+.vsteam {
+    display: block;
+    margin-left: auto;
+    padding-right: 150px;
+    width: 120px;
+    height: 120px;
 }
