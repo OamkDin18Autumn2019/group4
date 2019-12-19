@@ -5,6 +5,7 @@ import axios from 'axios';
 import team1 from './team-images/team1.png';
 import team2 from './team-images/team2.png';
 import team3 from './team-images/team3.png';
+import vsteam from '../vsteam.svg';
 
 
 export default class VSBlock extends Component {
@@ -33,20 +34,18 @@ export default class VSBlock extends Component {
     var testi = ParsedUser.teamid;
     var mappedmatches = this.state.matches.map(x => x.matchdate)
     var latestmatch = String(mappedmatches[0])
-    var date = latestmatch.slice(0,10)
-    var hometeammap = this.state.matches.map(x=> x.team1)
-    var awayteammap = this.state.matches.map(x=>x.team2)
+    var date = latestmatch.slice(0, 10)
+    var hometeammap = this.state.matches.map(x => x.team1)
+    var awayteammap = this.state.matches.map(x => x.team2)
     var hometeamslice = hometeammap[0]
     var awayteamslice = awayteammap[0]
     var team1image = null
     var team2image = null
 
-    if (hometeamslice === "1")
-    {
+    if (hometeamslice === "1") {
       team1image = team1;
     }
-    if (awayteamslice === "2")
-    {
+    if (awayteamslice === "2") {
       team2image = team2;
     }
 
@@ -55,16 +54,28 @@ export default class VSBlock extends Component {
     return (
       <div className="VSBlock">
         <div className="vsbox">
-          <h1>Next game</h1>
+          <h1 className="gametitle">Next Game</h1>
           <div>
-          <img alt="ayeelmao" src={team1image} className="VSBlock_hometeamimg"></img>
-        </div>
-        <div>
-          <img alt="ayeelmao2" src={team2image} className="VSBlock_awayteamimg"></img>
-        </div>
-        <div>
-          <p>{date}</p>
-        </div>
+            <img alt="ayeelmao" src={team1image} className="VSBlock_hometeamimg"></img>
+          </div>
+
+
+          <div>
+            <img alt="ayeelmao2" src={team2image} className="VSBlock_awayteamimg"></img>
+          </div>
+
+          <div className="gametime">
+            <p className="playtime">{date}</p>
+          </div>
+
+          <div>
+            <div className="teamline">
+              <img className="vsteam" src={vsteam} />
+            </div>
+          </div>
+
+
+
         </div>
 
       </div>

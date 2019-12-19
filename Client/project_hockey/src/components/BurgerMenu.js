@@ -1,21 +1,20 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './BurgerMenu.css';
 
 export default function BurgerMenu() {
 
     let ParsedUser = JSON.parse(sessionStorage.getItem("User"));
 
-    function userteam(){
-        if(ParsedUser.teamid === null || ParsedUser.teamid === ""){
-            return (<li><Link to="/NoTeam" >My Team</Link></li>)
+    function userteam() {
+        if (ParsedUser.teamid === null || ParsedUser.teamid === "") {
+            return (<li><Link to="/NoTeam" >Team</Link></li>)
         }
-        else{
-            return (<li><Link to={ `/teams/${ParsedUser.teamid}` }>My Team</Link></li>)
+        else {
+            return (<li><Link to={`/teams/${ParsedUser.teamid}`}>Team</Link></li>)
         }
     }
-    function logout()
-    {
+    function logout() {
         sessionStorage.clear();
         window.location.reload();
     }
@@ -32,10 +31,10 @@ export default function BurgerMenu() {
                     <span></span>
 
                     <ul id="menu">
-                        <li><Link to={ `/users/${ParsedUser.id}` }>My Profile</Link></li>
-                        <li><Link to="../MyMatches">My Matches</Link></li>
+                        <li><Link to={`/users/${ParsedUser.id}`}>Profile</Link></li>
+                        <li><Link to="../MyMatches">Matches</Link></li>
                         {userteam()}
-                        <li onClick={logout}><Link style={{color:"red"}}>Logout</Link></li>
+                        <li onClick={logout}><Link style={{ color: "#1d74b5" }}>Logout</Link></li>
                     </ul>
                 </div>
             </nav>
