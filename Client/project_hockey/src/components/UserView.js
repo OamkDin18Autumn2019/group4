@@ -34,10 +34,10 @@ export default function UserView(props) {
                     console.log(User[0]);
                     console.log(User[0].handedness);
                     if(User[0].handness === 0){
-                        setHandedness("Righthanded");
+                        setHandedness("Right-handed");
                     }
                     else{
-                        setHandedness("Lefthanded");
+                        setHandedness("Left-handed");
                     }
 
                     if(User[0].role === 0){

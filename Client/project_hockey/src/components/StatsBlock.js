@@ -47,21 +47,21 @@ export default class StatsBlock extends Component {
 
         <div className="statsTeam">
           <h2>TOP TEAMS</h2>
-          <ul>
+          <ul style={{paddingLeft: 0}}>
             {teams}
           </ul>
         </div>
 
         <div className="topScores">
           <h2>TOP SCORERS</h2>
-          <ul>
+          <ul style={{paddingLeft: 0}}>
             {goals}
           </ul>
         </div>
 
         <div className="teamInfo">
           <h2>TOP WINGMANS</h2>
-          <ul>
+          <ul style={{paddingLeft: 0}}>
             {assists}
           </ul>
         </div>
