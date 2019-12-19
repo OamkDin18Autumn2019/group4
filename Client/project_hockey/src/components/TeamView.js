@@ -86,16 +86,12 @@ export default function TeamView(props) {
     function noteam(){
         if(ParsedUser.teamid === null || ParsedUser.teamid === ""){
             function jointeam(){
-                console.log(ParsedUser.id + "id")
-                console.log(parseInt(props.match.params.id) + "team")
                 axios.post(APIconnection.baseAddress + "/jointeam", {
                     data: {
                         userid: ParsedUser.id,
                         teamid: parseInt(props.match.params.id)
                     }
                 }).then(results => {
-                    console.log(results);
-                    console.log(results.data);
                 });
 
                 //Updating the stored team value
@@ -115,7 +111,12 @@ export default function TeamView(props) {
 
         }
     }
-    console.log("neekeri")
+    function teamimage(){
+        if(Team.teamid === 1)
+        {
+           return (<p>test</p>)
+        }
+    }
 
     return (
     <div style={{textAlign: "center"}}>
@@ -126,12 +127,14 @@ export default function TeamView(props) {
 
             <div>
                 <div>
-                    
-                    {Team.map(team => <div><h1>{team.teamname}</h1> <br/> <h3>{team.teaminfo}</h3></div>)} 
-                    The owner of this team is <Link to={ `/users/${OwnerId}` }>{TeamOwner}</Link>
+                    <div>
+                        {teamimage()}
+                    </div>
+                    {Team.map(team => <div><h1>{team.teamname}</h1> <br/> <h3 style={{marginLeft: "auto", marginRight: "auto", width: "40%"}}>{team.teaminfo}</h3></div>)} 
+                    The owner of this team is <b><Link to={ `/users/${OwnerId}` }>{TeamOwner}</Link></b>
                     <h3>Stats:</h3>
-                    {Team.map(team => <div><a style={{ color: "green" }}>{team.teamwins} wins</a> and <a style={{ color: "red" }}> {team.teamlosses} losses</a></div>)} 
-                    Members: {TeamMembers.map(member => <div><Link to={ `/users/${member.id}` }>{member.username}</Link></div>)}
+                    {Team.map(team => <div><a style={{ color: "green", fontSize: "25px" }}>{team.teamwins} wins</a> and <a style={{ color: "red", fontSize: "25px"  }}> {team.teamlosses} losses</a></div>)} 
+                   <br></br> <p style={{ fontSize: "25px" }}>Members:</p> {TeamMembers.map(member => <div><Link to={ `/users/${member.id}` }>{member.username}</Link></div>)}
                     <br></br>
                     {noteam()}
                     

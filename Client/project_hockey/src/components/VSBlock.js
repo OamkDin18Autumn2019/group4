@@ -45,11 +45,30 @@ export default class VSBlock extends Component {
     if (hometeamslice === "1") {
       team1image = team1;
     }
-    if (awayteamslice === "2") {
+    if (awayteamslice === "1")
+    {
+      team2image = team1;
+    }
+    if (hometeamslice === "2")
+    {
+      team1image = team2;
+    }
+    if (awayteamslice === "2")
+    {
       team2image = team2;
     }
+    if (hometeamslice === "3")
+    {
+      team1image = team3;
+    }
+    if (awayteamslice === "3")
+    {
+      team2image = team3;
+    }
+    
 
     console.log(hometeamslice)
+    console.log(awayteamslice)
 
     return (
       <div className="VSBlock">
